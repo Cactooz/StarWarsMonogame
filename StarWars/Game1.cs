@@ -16,6 +16,8 @@ namespace StarWars
         public static int windowWidth;
         public static int windowHeight;
 
+        Texture2D xwingImg, tiefighterImg, redLaser;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -53,7 +55,10 @@ namespace StarWars
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            //Load in textures for the gameObjects
+            xwingImg = Content.Load<Texture2D>("xwing");
+            tiefighterImg = Content.Load<Texture2D>("tiefighter");
+            redLaser = Content.Load<Texture2D>("redLaser");
         }
 
         /// <summary>
