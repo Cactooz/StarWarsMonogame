@@ -10,12 +10,25 @@ namespace StarWars
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        public static SpriteBatch spriteBatch;
+
+        //Declare variables for window size
+        public static int windowWidth;
+        public static int windowHeight;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            //Gamewindow size and fullscreen mode
+            graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            graphics.IsFullScreen = false;
+
+            //Give the window size variables their value
+            windowHeight = graphics.PreferredBackBufferHeight;
+            windowWidth = graphics.PreferredBackBufferWidth;
         }
 
         /// <summary>
@@ -73,7 +86,7 @@ namespace StarWars
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
 
