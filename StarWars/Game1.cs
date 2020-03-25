@@ -18,6 +18,7 @@ namespace StarWars
 
         Texture2D xwingImg, tiefighterImg, redLaser;
 
+        Player xwing;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -59,6 +60,8 @@ namespace StarWars
             xwingImg = Content.Load<Texture2D>("xwing");
             tiefighterImg = Content.Load<Texture2D>("tiefighter");
             redLaser = Content.Load<Texture2D>("redLaser");
+
+            xwing = new Player(xwingImg, 110, 10);
         }
 
         /// <summary>
@@ -93,8 +96,13 @@ namespace StarWars
         {
             GraphicsDevice.Clear(Color.Black);
 
-            // TODO: Add your drawing code here
+            //Start of drawing all gameObjects on the screen
+            spriteBatch.Begin();
 
+            xwing.Draw(spriteBatch);
+
+
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }

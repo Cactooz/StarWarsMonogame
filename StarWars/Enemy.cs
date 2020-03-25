@@ -7,7 +7,7 @@ namespace StarWars
 {
     class Enemy:Entity
     {
-        public Enemy(Texture2D texture, Vector2 position, int hitboxSize, int speed):base(texture, position, hitboxSize, speed) { }
+        public Enemy(Texture2D texture, int hitboxSize, int speed):base(texture, hitboxSize, speed) { }
 
         public override void Update()
         {

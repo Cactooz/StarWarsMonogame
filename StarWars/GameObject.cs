@@ -10,14 +10,13 @@ namespace StarWars
         private Vector2 position;
         private Rectangle hitbox;
 
-        public Vector2 Position { get => position; }
+        public Vector2 Position { get => position; set => position = value; }
         public Rectangle Hitbox { get => hitbox; }
 
-        public GameObject(Texture2D texture, Vector2 position, int hitboxSize)
+        public GameObject(Texture2D texture, int hitboxSize)
         {
             //Load the textures and position
             this.texture = texture;
-            this.position = position;
 
             //Set the hitbox size
             hitbox.Size = new Point(hitboxSize, hitboxSize);
@@ -28,9 +27,9 @@ namespace StarWars
             hitbox.Location = position.ToPoint();
         }
 
-        public virtual void Draw()
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
-            Game1.spriteBatch.Draw(texture, hitbox, Color.White);
+            spriteBatch.Draw(texture, hitbox, Color.White);
         }
 
     }

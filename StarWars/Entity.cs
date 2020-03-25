@@ -1,6 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
+﻿using Microsoft.Xna.Framework.Graphics;
 
 namespace StarWars
 {
@@ -14,7 +12,7 @@ namespace StarWars
 
         public bool Alive { get => alive; set => alive = value; }
 
-        public Entity(Texture2D texture, Vector2 position, int hitboxSize, int speed):base(texture, position, hitboxSize)
+        public Entity(Texture2D texture, int hitboxSize, int speed):base(texture, hitboxSize)
         {
             this.speed = speed;
         }

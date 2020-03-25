@@ -6,7 +6,7 @@ namespace StarWars
 {
     class Laser:Entity
     {
-        public Laser(Texture2D texture, Vector2 position, int hitboxSize, int speed):base(texture, position, hitboxSize, speed) { }
+        public Laser(Texture2D texture, int hitboxSize, int speed):base(texture, hitboxSize, speed) { }
 
         public override void Update()
         {
