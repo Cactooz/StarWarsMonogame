@@ -6,9 +6,9 @@ namespace StarWars
     class GameObject
     {
         //Texture position and hitbox for the gameObject
-        private Texture2D texture;
-        private Vector2 position;
-        private Rectangle hitbox;
+        protected Texture2D texture;
+        protected Vector2 position;
+        protected Rectangle hitbox;
 
         public Vector2 Position { get => position; set => position = value; }
         public Rectangle Hitbox { get => hitbox; }
@@ -31,6 +31,5 @@ namespace StarWars
         {
             spriteBatch.Draw(texture, hitbox, Color.White);
         }
-
     }
 }

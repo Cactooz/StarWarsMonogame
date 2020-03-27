@@ -10,14 +10,16 @@ namespace StarWars
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
-        public static SpriteBatch spriteBatch;
+        SpriteBatch spriteBatch;
 
         //Declare variables for window size
-        public static int windowWidth;
-        public static int windowHeight;
+        private static int windowWidth;
+        private static int windowHeight;
 
+        //Textures for the gameObjects
         Texture2D xwingImg, tiefighterImg, redLaser;
 
+        //Class objects
         Player xwing;
         public Game1()
         {
@@ -33,6 +35,8 @@ namespace StarWars
             windowHeight = graphics.PreferredBackBufferHeight;
             windowWidth = graphics.PreferredBackBufferWidth;
         }
+        public static int WindowWidth { get => windowWidth; }
+        public static int WindowHeight { get => windowHeight; }
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -61,6 +65,7 @@ namespace StarWars
             tiefighterImg = Content.Load<Texture2D>("tiefighter");
             redLaser = Content.Load<Texture2D>("redLaser");
 
+            //Creates the player xwing
             xwing = new Player(xwingImg, 110, 10);
         }
 
@@ -83,7 +88,8 @@ namespace StarWars
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            //Update the player
+            xwing.Update();
 
             base.Update(gameTime);
         }
@@ -99,8 +105,8 @@ namespace StarWars
             //Start of drawing all gameObjects on the screen
             spriteBatch.Begin();
 
+            //Draw the xwing
             xwing.Draw(spriteBatch);
-
 
             spriteBatch.End();
             base.Draw(gameTime);

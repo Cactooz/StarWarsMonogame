@@ -5,10 +5,10 @@ namespace StarWars
     class Entity:GameObject
     {
         //Speed for the entity when it moves
-        private int speed;
+        protected int speed;
 
         //If the entity is alive or not
-        private bool alive = true;
+        protected bool alive = true;
 
         public bool Alive { get => alive; set => alive = value; }
 
