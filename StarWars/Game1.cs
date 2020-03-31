@@ -20,15 +20,15 @@ namespace StarWars
         Texture2D xwingImg, tiefighterImg, redLaser;
 
         //Class objects
-        Player xwing;
+        Player player;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
             //Gamewindow size and fullscreen mode
-            graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-            graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            graphics.PreferredBackBufferHeight = 1000/*GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height*/;
+            graphics.PreferredBackBufferWidth = 300/*GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width*/;
             graphics.IsFullScreen = false;
 
             //Give the window size variables their value
@@ -66,7 +66,7 @@ namespace StarWars
             redLaser = Content.Load<Texture2D>("redLaser");
 
             //Creates the player xwing
-            xwing = new Player(xwingImg, 110, 10);
+            player = new Player(xwingImg, 110, 10, redLaser);
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace StarWars
                 Exit();
 
             //Update the player
-            xwing.Update();
+            player.Update();
 
             base.Update(gameTime);
         }
@@ -106,7 +106,7 @@ namespace StarWars
             spriteBatch.Begin();
 
             //Draw the xwing
-            xwing.Draw(spriteBatch);
+            player.Draw(spriteBatch);
 
             spriteBatch.End();
             base.Draw(gameTime);
