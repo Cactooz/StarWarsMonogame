@@ -34,6 +34,9 @@ namespace StarWars
 
             Shoot();
 
+            //Tell the laserHandler to update that lasers
+            laserHandler.Update();
+
             //Save the old keyboard state (to check if the input is a click) 
             kOldState = kNewState;
         }

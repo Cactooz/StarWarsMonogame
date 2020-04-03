@@ -27,8 +27,8 @@ namespace StarWars
             Content.RootDirectory = "Content";
 
             //Gamewindow size and fullscreen mode
-            graphics.PreferredBackBufferHeight = 1000/*GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height*/;
-            graphics.PreferredBackBufferWidth = 300/*GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width*/;
+            graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             graphics.IsFullScreen = false;
 
             //Give the window size variables their value

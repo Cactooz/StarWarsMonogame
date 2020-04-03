@@ -5,7 +5,15 @@ namespace StarWars
 {
     class Laser:Entity
     {
-        public Laser(Texture2D texture, Vector2 position, int hitboxSize, int speed):base(texture, hitboxSize, speed) { }
+        public Laser(Texture2D texture, Vector2 position, int hitboxSize, int hitboxY, int speed):base(texture, hitboxSize, speed)
+        {
+            //Set the position of the laser
+            Position = position;
+
+            //Set the hitbox position
+            hitbox.Height = hitboxY;
+            hitbox.Width = hitboxSize;
+        }
 
         public override void Update()
         {
