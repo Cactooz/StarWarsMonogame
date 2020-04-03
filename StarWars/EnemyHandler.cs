@@ -40,8 +40,15 @@ namespace StarWars
                 enemies.Add(new Enemy(texture, 80, 10, positionX));
             }
         }
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            //Draw the lasers
+            foreach (Enemy enemy in enemies)
+                enemy.Draw(spriteBatch);
+        }
         private void CheckIfOutside()
         {
+            //Set the enemy alive state to false if the enemy is outside of the screen
             foreach (Enemy enemy in enemies)
             {
                 if (enemy.Hitbox.Y >= Game1.WindowHeight + 10)
@@ -50,14 +57,16 @@ namespace StarWars
         }
         private void RemoveEnemies()
         {
+            //A temporary list to fill with enemies
             List<Enemy> tempEnemies = new List<Enemy>();
 
+            //If the enemy is alive, add them to the temp list
             foreach (Enemy enemy in enemies)
             {
                 if (enemy.Alive)
                     tempEnemies.Add(enemy);
             }
-
+            //Overwrite the enemies list with the temp list
             enemies = tempEnemies;
         }
     }

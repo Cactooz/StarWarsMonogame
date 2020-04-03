@@ -115,10 +115,8 @@ namespace StarWars
             //Draw the xwing
             player.Draw(spriteBatch);
 
-            foreach (Enemy enemy in enemyHandler.Enemies)
-            {
-                enemy.Draw(spriteBatch);
-            }
+            //Draw the enemies
+            enemyHandler.Draw(spriteBatch);
 
             spriteBatch.End();
             base.Draw(gameTime);
