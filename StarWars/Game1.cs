@@ -21,6 +21,7 @@ namespace StarWars
 
         //Class objects
         Player player;
+        EnemyHandler enemyHandler;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -67,6 +68,7 @@ namespace StarWars
 
             //Creates the player xwing
             player = new Player(xwingImg, 110, 10, redLaser);
+            enemyHandler = new EnemyHandler(tiefighterImg);
         }
 
         /// <summary>
@@ -91,6 +93,11 @@ namespace StarWars
             //Update the player
             player.Update();
 
+            //Spawn enemies and update them
+            enemyHandler.Spawn();
+            enemyHandler.Update();
+            
+
             base.Update(gameTime);
         }
 
@@ -107,6 +114,11 @@ namespace StarWars
 
             //Draw the xwing
             player.Draw(spriteBatch);
+
+            foreach (Enemy enemy in enemyHandler.Enemies)
+            {
+                enemy.Draw(spriteBatch);
+            }
 
             spriteBatch.End();
             base.Draw(gameTime);

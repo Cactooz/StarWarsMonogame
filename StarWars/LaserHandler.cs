@@ -13,8 +13,7 @@ namespace StarWars
         private int speed = 10;
         private int hitboxX = 5;
         private int hitboxY = 10;
-
-        private Vector2 position = new Vector2(100, 50);
+         
         public List<Laser> Lasers { get => lasers; set => lasers = value; }
 
         public LaserHandler(Texture2D texture, Player player)
@@ -44,7 +43,7 @@ namespace StarWars
             CheckIfOutside();
 
             //Remove the lasers
-            RemoveObjects();
+            RemoveLasers();
         }
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -61,7 +60,7 @@ namespace StarWars
                     laser.Alive = false;
             }
         }
-        private void RemoveObjects()
+        private void RemoveLasers()
         {
             //Make a new temp list to fill with lasers
             List<Laser> tempLasers = new List<Laser>();
