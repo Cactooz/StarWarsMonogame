@@ -24,11 +24,13 @@ namespace StarWars
 
         public virtual void Update()
         {
+            //Set the hitbox to the position
             hitbox.Location = position.ToPoint();
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
+            //Draw the gameObejct with no extra color (Color.White)
             spriteBatch.Draw(texture, hitbox, Color.White);
         }
     }

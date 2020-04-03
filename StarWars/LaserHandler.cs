@@ -39,11 +39,41 @@ namespace StarWars
             //Update the laser positions
             foreach (Laser laser in lasers)
                 laser.Update();
+
+            //Check if the lasers are outside of the screen
+            CheckIfOutside();
+
+            //Remove the lasers
+            RemoveObjects();
         }
         public void Draw(SpriteBatch spriteBatch)
         {
+            //Draw the lasers
             foreach (Laser laser in lasers)
                 laser.Draw(spriteBatch);
+        }
+        private void CheckIfOutside()
+        {
+            //Set laser alive state to false if the laser is ouside of the screen
+            foreach (Laser laser in lasers)
+            {
+                if (laser.Position.Y <= -10)
+                    laser.Alive = false;
+            }
+        }
+        private void RemoveObjects()
+        {
+            //Make a new temp list to fill with lasers
+            List<Laser> tempLasers = new List<Laser>();
+
+            //For each laser that is alive, add it to the temp list
+            foreach (Laser laser in lasers)
+            {
+                if (laser.Alive)
+                    tempLasers.Add(laser);
+            }
+            //Overwrite lasers with the temp list
+            lasers = tempLasers;
         }
     }
 }

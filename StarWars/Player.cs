@@ -22,16 +22,17 @@ namespace StarWars
             //Set the laser texture / color
             this.laserTexture = laserTexture;
 
-            //
+            //Create the laserHandler object
             laserHandler = new LaserHandler(laserTexture, this);
         }
 
         public override void Update()
         {
+            //Get the keyboard state of what buttons are pressed
             kNewState = Keyboard.GetState();
 
             Move();
-
+            
             Shoot();
 
             //Tell the laserHandler to update that lasers
@@ -62,11 +63,13 @@ namespace StarWars
         }
         private void Shoot()
         {
+            //Spawn a laser (through the kaserHandler) if space is pressed, but not hold
             if (kNewState.IsKeyDown(Keys.Space) && kOldState.IsKeyUp(Keys.Space))
                 laserHandler.Spawn();
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
+            //Draw the lasers through the laserHandler
             laserHandler.Draw(spriteBatch);
 
             //Calls the base Draw method for drawing the xwing
