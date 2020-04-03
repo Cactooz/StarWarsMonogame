@@ -14,7 +14,7 @@ namespace StarWars
 
         private LaserHandler laserHandler;
 
-        public Player(Texture2D texture, int hitboxSize, int speed, Texture2D laserTexture):base(texture, hitboxSize, speed)
+        public Player(Texture2D texture, int hitboxX, int hitboxY, int speed, Texture2D laserTexture):base(texture, hitboxX, hitboxY, speed)
         {
             //Set the start position
             Position = new Vector2((Game1.WindowWidth / 2) - (Hitbox.Width / 2), Game1.WindowHeight - Hitbox.Height - 50);

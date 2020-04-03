@@ -17,11 +17,13 @@ namespace StarWars
         private static int windowHeight;
 
         //Textures for the gameObjects
-        Texture2D xwingImg, tiefighterImg, redLaser;
+        Texture2D xwingImg, tiefighterImg, redLaser, backgroundImg;
 
         //Class objects
         Player player;
         EnemyHandler enemyHandler;
+        GameObject background;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -62,13 +64,15 @@ namespace StarWars
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             //Load in textures for the gameObjects
+            backgroundImg = Content.Load<Texture2D>("stars");
             xwingImg = Content.Load<Texture2D>("xwing");
             tiefighterImg = Content.Load<Texture2D>("tiefighter");
             redLaser = Content.Load<Texture2D>("redLaser");
 
             //Creates the player xwing
-            player = new Player(xwingImg, 110, 10, redLaser);
+            player = new Player(xwingImg, 110, 110, 10, redLaser);
             enemyHandler = new EnemyHandler(tiefighterImg);
+            background = new GameObject(backgroundImg, windowWidth, windowHeight);
         }
 
         /// <summary>
@@ -111,6 +115,9 @@ namespace StarWars
 
             //Start of drawing all gameObjects on the screen
             spriteBatch.Begin();
+
+            //Draw the background stars
+            background.Draw(spriteBatch);
 
             //Draw the xwing
             player.Draw(spriteBatch);

@@ -12,7 +12,7 @@ namespace StarWars
 
         public bool Alive { get => alive; set => alive = value; }
 
-        public Entity(Texture2D texture, int hitboxSize, int speed):base(texture, hitboxSize)
+        public Entity(Texture2D texture, int hitboxX, int hitboxY, int speed):base(texture, hitboxX, hitboxY)
         {
             this.speed = speed;
         }

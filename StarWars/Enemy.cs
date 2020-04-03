@@ -6,7 +6,7 @@ namespace StarWars
 {
     class Enemy:Entity
     {
-        public Enemy(Texture2D texture, int hitboxSize, int speed, int positionX):base(texture, hitboxSize, speed)
+        public Enemy(Texture2D texture, int hitboxX, int hitboxY, int speed, int positionX):base(texture, hitboxX, hitboxY, speed)
         {
             //Set the position of the enemy
             position.X = positionX;

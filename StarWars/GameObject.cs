@@ -13,13 +13,13 @@ namespace StarWars
         public Vector2 Position { get => position; set => position = value; }
         public Rectangle Hitbox { get => hitbox; }
 
-        public GameObject(Texture2D texture, int hitboxSize)
+        public GameObject(Texture2D texture, int hitboxX, int hitboxY)
         {
             //Load the textures and position
             this.texture = texture;
 
             //Set the hitbox size
-            hitbox.Size = new Point(hitboxSize, hitboxSize);
+            hitbox.Size = new Point(hitboxX, hitboxY);
         }
 
         public virtual void Update()
