@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace StarWars
@@ -37,7 +36,7 @@ namespace StarWars
                 int positionX = random.Next(Game1.WindowWidth);
 
                 //Add the enemy
-                enemies.Add(new Enemy(texture, 80, 80, 10, positionX));
+                enemies.Add(new Enemy(texture, 80, 64, 10, positionX));
             }
         }
         public void Draw(SpriteBatch spriteBatch)

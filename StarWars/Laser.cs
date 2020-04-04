@@ -19,6 +19,11 @@ namespace StarWars
         {
             Move();
         }
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            //Draw the laser with red color overlay
+            spriteBatch.Draw(texture, hitbox, Color.Red);
+        }
         private void Move()
         {
             //Move the lasers by its speed on the Y axis

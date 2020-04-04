@@ -17,7 +17,7 @@ namespace StarWars
         private static int windowHeight;
 
         //Textures for the gameObjects
-        Texture2D xwingImg, tiefighterImg, redLaser, backgroundImg;
+        Texture2D xwingImg, tiefighterImg, laser, backgroundImg;
 
         //Class objects
         Player player;
@@ -67,10 +67,10 @@ namespace StarWars
             backgroundImg = Content.Load<Texture2D>("stars");
             xwingImg = Content.Load<Texture2D>("xwing");
             tiefighterImg = Content.Load<Texture2D>("tiefighter");
-            redLaser = Content.Load<Texture2D>("redLaser");
+            laser = Content.Load<Texture2D>("laser");
 
             //Creates the player xwing
-            player = new Player(xwingImg, 110, 110, 10, redLaser);
+            player = new Player(xwingImg, (xwingImg.Width / 5), (xwingImg.Height / 5), 10, laser);
             enemyHandler = new EnemyHandler(tiefighterImg);
             background = new GameObject(backgroundImg, windowWidth, windowHeight);
         }
