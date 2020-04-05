@@ -100,8 +100,10 @@ namespace StarWars
             //Spawn enemies and update them
             enemyHandler.Spawn();
             enemyHandler.Update();
-            
 
+            //Check collisions between gameobjects
+            Collisions();
+            
             base.Update(gameTime);
         }
 
@@ -127,6 +129,30 @@ namespace StarWars
 
             spriteBatch.End();
             base.Draw(gameTime);
+        }
+
+        private void Collisions()
+        {
+            foreach (Enemy enemy in enemyHandler.Enemies)
+            {
+                foreach (Laser laser in player.LaserHandler.Lasers)
+                {
+                    //Remove lasers that hits enemies and remove the enemy that gets hit
+                    if (laser.Hitbox.Intersects(enemy.Hitbox))
+                    {
+                        laser.Alive = false;
+                        enemy.Alive = false;
+                        //TODO: Remove enemy lives and check if lives = 0, then Alive = false
+                    }
+                }
+
+                //Remove enemies that the player hits
+                if (player.Hitbox.Intersects(enemy.Hitbox))
+                {
+                    enemy.Alive = false;
+                    //TODO: Remove player lives
+                }
+            }
         }
     }
 }

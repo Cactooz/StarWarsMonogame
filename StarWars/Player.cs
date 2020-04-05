@@ -14,6 +14,8 @@ namespace StarWars
 
         private LaserHandler laserHandler;
 
+        public LaserHandler LaserHandler { get => laserHandler; }
+
         public Player(Texture2D texture, int hitboxX, int hitboxY, int speed, Texture2D laserTexture):base(texture, hitboxX, hitboxY, speed)
         {
             //Set the start position
