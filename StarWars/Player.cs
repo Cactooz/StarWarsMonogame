@@ -19,7 +19,7 @@ namespace StarWars
         public Player(Texture2D texture, int hitboxX, int hitboxY, int speed, Texture2D laserTexture):base(texture, hitboxX, hitboxY, speed)
         {
             //Set the start position
-            Position = new Vector2((Game1.WindowWidth / 2) - (Hitbox.Width / 2), Game1.WindowHeight - Hitbox.Height - 50);
+            Position = new Vector2((Game1.WindowWidth / 2) - (Hitbox.Width / 2), Game1.WindowHeight - Hitbox.Height - (Game1.WindowHeight * 0.05f));
 
             //Set the laser texture / color
             this.laserTexture = laserTexture;

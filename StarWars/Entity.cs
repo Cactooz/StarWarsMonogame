@@ -10,11 +10,16 @@ namespace StarWars
         //If the entity is alive or not
         protected bool alive = true;
 
+        //The lives/amount of times a enetiy can hit another entity
+        protected int hitpoints = 1;
+
         public bool Alive { get => alive; set => alive = value; }
+        public int Hitpoints { get => hitpoints; set => hitpoints = value; }
 
         public Entity(Texture2D texture, int hitboxX, int hitboxY, int speed):base(texture, hitboxX, hitboxY)
         {
+            //Movement speed of the entity
             this.speed = speed;
-        }
+    }
     }
 }

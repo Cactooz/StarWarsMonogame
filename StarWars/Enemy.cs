@@ -1,17 +1,19 @@
-﻿using System.Collections.Generic;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace StarWars
 {
     class Enemy:Entity
     {
-        public Enemy(Texture2D texture, int hitboxX, int hitboxY, int speed, int positionX):base(texture, hitboxX, hitboxY, speed)
+        public Enemy(Texture2D texture, int hitboxX, int hitboxY, int speed, int positionX, int hitpoints):base(texture, hitboxX, hitboxY, speed)
         {
             //Set the position of the enemy
             position.X = positionX;
             position.Y = -100;
-        }
+
+            //Hitpoints of the enemy (how many times it can be hit by lasers or the player)
+            this.hitpoints = hitpoints;
+    }
 
         public override void Update()
         {

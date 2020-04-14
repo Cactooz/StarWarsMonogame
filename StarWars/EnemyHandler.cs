@@ -24,6 +24,7 @@ namespace StarWars
                 enemy.Update();
             }
 
+            CheckHitpoints();
             CheckIfOutside();
             RemoveEnemies();
         }
@@ -36,7 +37,7 @@ namespace StarWars
                 int positionX = random.Next(Game1.WindowWidth);
 
                 //Add the enemy
-                enemies.Add(new Enemy(texture, 80, 64, 10, positionX));
+                enemies.Add(new Enemy(texture, 80, 64, 10, positionX, 1));
             }
         }
         public void Draw(SpriteBatch spriteBatch)
@@ -44,6 +45,15 @@ namespace StarWars
             //Draw the lasers
             foreach (Enemy enemy in enemies)
                 enemy.Draw(spriteBatch);
+        }
+        private void CheckHitpoints()
+        {
+            //Check if the enemy has less than 1 hitpoint and if so mark is as not alive
+            foreach(Enemy enemy in enemies)
+            {
+                if (enemy.Hitpoints <= 0)
+                    enemy.Alive = false;
+            }
         }
         private void CheckIfOutside()
         {

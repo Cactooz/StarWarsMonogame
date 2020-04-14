@@ -141,15 +141,14 @@ namespace StarWars
                     if (laser.Hitbox.Intersects(enemy.Hitbox))
                     {
                         laser.Alive = false;
-                        enemy.Alive = false;
-                        //TODO: Remove enemy lives and check if lives = 0, then Alive = false
+                        enemy.Hitpoints--;
                     }
                 }
 
                 //Remove enemies that the player hits
                 if (player.Hitbox.Intersects(enemy.Hitbox))
                 {
-                    enemy.Alive = false;
+                    enemy.Hitpoints--;
                     //TODO: Remove player lives
                 }
             }
