@@ -70,7 +70,7 @@ namespace StarWars
             laser = Content.Load<Texture2D>("laser");
 
             //Creates the player xwing
-            player = new Player(xwingImg, (xwingImg.Width / 5), (xwingImg.Height / 5), 10, laser);
+            player = new Player(xwingImg, (xwingImg.Width / 5), (xwingImg.Height / 5), 10, 3, laser);
             enemyHandler = new EnemyHandler(tiefighterImg);
             background = new GameObject(backgroundImg, windowWidth, windowHeight);
         }
@@ -149,7 +149,7 @@ namespace StarWars
                 if (player.Hitbox.Intersects(enemy.Hitbox))
                 {
                     enemy.Hitpoints--;
-                    //TODO: Remove player lives
+                    player.Hitpoints--;
                 }
             }
         }

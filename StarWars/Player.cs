@@ -16,7 +16,7 @@ namespace StarWars
 
         public LaserHandler LaserHandler { get => laserHandler; }
 
-        public Player(Texture2D texture, int hitboxX, int hitboxY, int speed, Texture2D laserTexture):base(texture, hitboxX, hitboxY, speed)
+        public Player(Texture2D texture, int hitboxX, int hitboxY, int speed, int hitpoints, Texture2D laserTexture):base(texture, hitboxX, hitboxY, speed)
         {
             //Set the start position
             Position = new Vector2((Game1.WindowWidth / 2) - (Hitbox.Width / 2), Game1.WindowHeight - Hitbox.Height - (Game1.WindowHeight * 0.05f));
@@ -26,6 +26,8 @@ namespace StarWars
 
             //Create the laserHandler object
             laserHandler = new LaserHandler(laserTexture, this);
+
+            this.hitpoints = hitpoints;
         }
 
         public override void Update()
@@ -39,6 +41,8 @@ namespace StarWars
 
             //Tell the laserHandler to update that lasers
             laserHandler.Update();
+
+            CheckHitpoints();
 
             //Save the old keyboard state (to check if the input is a click) 
             kOldState = kNewState;
@@ -74,8 +78,16 @@ namespace StarWars
             //Draw the lasers through the laserHandler
             laserHandler.Draw(spriteBatch);
 
-            //Calls the base Draw method for drawing the xwing
-            base.Draw(spriteBatch);
+            //Calls the base Draw method for drawing the xwing if it's alive
+            if (alive)
+                base.Draw(spriteBatch);
         }
+        private void CheckHitpoints()
+        {
+            //Change player alive state to false if it has less than 1 hitpoints
+            if (hitpoints <= 0)
+                alive = false;
+        }
+        //TODO: Make a game over scene when the player is no longer alive
      }
 }
