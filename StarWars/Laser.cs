@@ -5,7 +5,7 @@ namespace StarWars
 {
     class Laser:Entity
     {
-        public Laser(Texture2D texture, Vector2 position, int hitboxX, int hitboxY, int speed):base(texture, hitboxX, hitboxY, speed)
+        public Laser(Texture2D texture, Vector2 position, int hitboxX, int hitboxY, float speed):base(texture, hitboxX, hitboxY, speed)
         {
             //Set the position of the laser
             Position = position;

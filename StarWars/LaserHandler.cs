@@ -10,7 +10,7 @@ namespace StarWars
         private List<Laser> lasers = new List<Laser>();
         private Player player;
 
-        private int speed = 10;
+        private float speed = 10f;
         private int hitboxX = 5;
         private int hitboxY = 10;
          

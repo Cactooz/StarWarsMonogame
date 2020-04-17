@@ -5,14 +5,21 @@ namespace StarWars
 {
     class Enemy:Entity
     {
-        public Enemy(Texture2D texture, int hitboxX, int hitboxY, int speed, int positionX, int hitpoints):base(texture, hitboxX, hitboxY, speed)
+        private bool mustDie = false;
+
+        public bool MustDie { get => mustDie; }
+
+        public Enemy(Texture2D texture, int hitboxX, int hitboxY, float speed, int positionX, int hitpoints, bool mustDie):base(texture, hitboxX, hitboxY, speed)
         {
             //Set the position of the enemy
             position.X = positionX;
-            position.Y = -100;
+            position.Y = -50 - hitboxY;
 
             //Hitpoints of the enemy (how many times it can be hit by lasers or the player)
             this.hitpoints = hitpoints;
+
+            //Sets if the enemy must die before it goes outside of the screen
+            this.mustDie = mustDie;
     }
 
         public override void Update()
