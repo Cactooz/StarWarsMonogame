@@ -47,6 +47,15 @@ namespace StarWars
             //Save the old keyboard state (to check if the input is a click) 
             kOldState = kNewState;
         }
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            //Draw the lasers through the laserHandler
+            laserHandler.Draw(spriteBatch);
+
+            //Calls the base Draw method for drawing the xwing if it's alive
+            if (alive)
+                base.Draw(spriteBatch);
+        }
         private void Move()
         {
             //Move the player right when D or right arrow is pressed
@@ -72,15 +81,6 @@ namespace StarWars
             //Spawn a laser (through the kaserHandler) if space is pressed, but not hold
             if (kNewState.IsKeyDown(Keys.Space) && kOldState.IsKeyUp(Keys.Space))
                 laserHandler.Spawn();
-        }
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            //Draw the lasers through the laserHandler
-            laserHandler.Draw(spriteBatch);
-
-            //Calls the base Draw method for drawing the xwing if it's alive
-            if (alive)
-                base.Draw(spriteBatch);
         }
         private void CheckHitpoints()
         {

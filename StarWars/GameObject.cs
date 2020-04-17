@@ -21,13 +21,11 @@ namespace StarWars
             //Set the hitbox size
             hitbox.Size = new Point(hitboxX, hitboxY);
         }
-
         public virtual void Update()
         {
             //Set the hitbox to the position
             hitbox.Location = position.ToPoint();
         }
-
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             //Draw the gameObejct with no extra color (Color.White)

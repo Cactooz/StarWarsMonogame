@@ -39,6 +39,12 @@ namespace StarWars
             CheckIfOutside();
             RemoveEnemies();
         }
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            //Draw the lasers
+            foreach (Enemy enemy in enemies)
+                enemy.Draw(spriteBatch);
+        }
         public void Spawn()
         {
             SpawnTieFighter();
@@ -97,12 +103,6 @@ namespace StarWars
                 enemies.Add(new Enemy(devastatorTexture, 288, 480, 0.5f, positionX, 30, true));
                 timer.Reset();
             }
-        }
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            //Draw the lasers
-            foreach (Enemy enemy in enemies)
-                enemy.Draw(spriteBatch);
         }
         private void CheckHitpoints()
         {
