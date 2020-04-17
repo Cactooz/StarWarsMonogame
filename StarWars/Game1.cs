@@ -17,7 +17,7 @@ namespace StarWars
         private static int windowHeight;
 
         //Textures for the gameObjects
-        Texture2D xwingImg, tiefighterImg, devastatorImg, laser, backgroundImg, bomberImg, interceptorImg;
+        Texture2D xwingImg, tieFighterImg, devastatorImg, laser, backgroundImg, tieBomberImg, tieInterceptorImg, tieAdvancedImg;
 
         //Class objects
         Player player;
@@ -66,16 +66,17 @@ namespace StarWars
             //Load in textures for the gameObjects
             backgroundImg = Content.Load<Texture2D>("stars");
             xwingImg = Content.Load<Texture2D>("xwing");
-            tiefighterImg = Content.Load<Texture2D>("tiefighter");
+            tieFighterImg = Content.Load<Texture2D>("tiefighter");
+            tieBomberImg = Content.Load<Texture2D>("tiebomber");
+            tieInterceptorImg = Content.Load<Texture2D>("tieinterceptor");
             devastatorImg = Content.Load<Texture2D>("devastator");
-            bomberImg = Content.Load<Texture2D>("tiebomber");
-            interceptorImg = Content.Load<Texture2D>("tieinterceptor");
+            tieAdvancedImg = Content.Load<Texture2D>("tieadvanced");
             laser = Content.Load<Texture2D>("laser");
 
             //Creates the player xwing
             player = new Player(xwingImg, (xwingImg.Width / 5), (xwingImg.Height / 5), 10f, 3, laser);
             //Creates enemyHandler object and sending in all enemy textures
-            enemyHandler = new EnemyHandler(tiefighterImg, devastatorImg, bomberImg, interceptorImg);
+            enemyHandler = new EnemyHandler(tieFighterImg, devastatorImg, tieBomberImg, tieInterceptorImg, tieAdvancedImg);
             background = new GameObject(backgroundImg, windowWidth, windowHeight);
         }
 

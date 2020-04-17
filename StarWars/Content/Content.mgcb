@@ -49,6 +49,18 @@
 /processorParam:TextureFormat=Color
 /build:stars.png
 
+#begin tieadvanced.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:tieadvanced.png
+
 #begin tiebomber.png
 /importer:TextureImporter
 /processor:TextureProcessor

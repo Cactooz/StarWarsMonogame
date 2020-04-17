@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
-using System.Threading;
 
 namespace StarWars
 {
@@ -11,23 +10,26 @@ namespace StarWars
         Random random = new Random();
 
         //Add a stopwatch timer that will keep track of time
-        Stopwatch timer = Stopwatch.StartNew();
+        Stopwatch devastatorTimer = Stopwatch.StartNew();
+        Stopwatch advancedTimer = Stopwatch.StartNew();
 
         private List<Enemy> enemies = new List<Enemy>();
-        private Texture2D tieFighterTexture, devastatorTexture, bomberTexture, interceptorTexture;
+        private Texture2D tieFighterTexture, devastatorTexture, bomberTexture, interceptorTexture, advancedTexture;
 
         public List<Enemy> Enemies { get => enemies; set => enemies = value; }
 
-        public EnemyHandler(Texture2D tieFighterTexture, Texture2D devastatorTexture, Texture2D bomberTexture, Texture2D interceptorTexture)
+        public EnemyHandler(Texture2D tieFighterTexture, Texture2D devastatorTexture, Texture2D bomberTexture, Texture2D interceptorTexture, Texture2D advancedTexture)
         {
             //Add the textures for all enemies
             this.tieFighterTexture = tieFighterTexture;
             this.devastatorTexture = devastatorTexture;
             this.bomberTexture = bomberTexture;
             this.interceptorTexture = interceptorTexture;
+            this.advancedTexture = advancedTexture;
 
-            //Start stopwatch
-            timer.Start();
+            //Start stopwatches
+            devastatorTimer.Start();
+            advancedTimer.Start();
         }
         public void Update()
         {
@@ -51,11 +53,12 @@ namespace StarWars
             SpawnBomber();
             SpawnInterceptor();
             SpawnDevastator();
+            SpawnAdvanced();
         }
         private void SpawnTieFighter()
         {
             //Spawns tie fighters
-            int spawnrate = random.Next(20);
+            int spawnrate = random.Next(15);
             if (spawnrate == 0)
             {
                 //Get a random position over the screen
@@ -81,27 +84,40 @@ namespace StarWars
         private void SpawnInterceptor()
         {
             //Spawns interceptor
-            int spawnrate = random.Next(50);
+            int spawnrate = random.Next(60);
             if (spawnrate == 0)
             {
                 //Get a random position over the screen
-                int positionX = random.Next(Game1.WindowWidth - 78);
+                int positionX = random.Next(Game1.WindowWidth - 70);
 
                 //Add the enemy
-                enemies.Add(new Enemy(interceptorTexture, 70, 85, 12f, positionX, 3, false));
+                enemies.Add(new Enemy(interceptorTexture, 70, 85, 10f, positionX, 3, false));
             }
         }
         private void SpawnDevastator()
         {
             //Spawns devastator
-            int spawntime = 10;
-            if (timer.Elapsed.Seconds >= spawntime)
+            int spawntime = 30;
+            if (devastatorTimer.Elapsed.Seconds >= spawntime)
             {
                 //Get a random position over the screen
                 int positionX = random.Next(Game1.WindowWidth - 288);
 
                 enemies.Add(new Enemy(devastatorTexture, 288, 480, 0.5f, positionX, 30, true));
-                timer.Reset();
+                devastatorTimer.Restart();
+            }
+        }
+        private void SpawnAdvanced()
+        {
+            //Spawns devastator
+            int spawntime = 25;
+            if (devastatorTimer.Elapsed.Seconds >= spawntime)
+            {
+                //Get a random position over the screen
+                int positionX = random.Next(Game1.WindowWidth - 85);
+
+                enemies.Add(new Enemy(advancedTexture, 85, 69, 8.5f, positionX, 5, true));
+                devastatorTimer.Reset();
             }
         }
         private void CheckHitpoints()
