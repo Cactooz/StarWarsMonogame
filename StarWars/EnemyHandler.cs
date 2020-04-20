@@ -49,77 +49,44 @@ namespace StarWars
         }
         public void Spawn()
         {
-            SpawnTieFighter();
-            SpawnBomber();
-            SpawnInterceptor();
-            SpawnDevastator();
-            SpawnAdvanced();
+            //Spawn normal enemies
+            //Layout: texture, spawnAmount, hitBoxX, hitBoxY, speed, lives
+            SpawnNormal(tieFighterTexture, 15, 80, 64, 7.5f, 1);
+            SpawnNormal(bomberTexture, 50, 90, 95, 4f, 5);
+            SpawnNormal(interceptorTexture, 60, 70, 85, 10f, 3);
+
+            //Spawn boss enemies (that must die)
+            //Layout: texture, timer, spawnTime, hitBoxX, hitBoxY, speed, lives
+            SpawnBoss(devastatorTexture, devastatorTimer, 35, 288, 480, 0.5f, 30);
+            SpawnBoss(advancedTexture, advancedTimer, 10, 85, 69, 5f, 5);
         }
-        private void SpawnTieFighter()
+        private void SpawnNormal(Texture2D texture, int spawnAmount, int hitBoxX, int hitBoxY, float speed, int lives)
         {
-            //Spawns tie fighters
-            int spawnrate = random.Next(15);
+            //Spawns normal enemies
+            int spawnrate = random.Next(spawnAmount);
             if (spawnrate == 0)
             {
                 //Get a random position over the screen
-                int positionX = random.Next(Game1.WindowWidth - 80);
+                int positionX = random.Next(Game1.WindowWidth - hitBoxX);
 
                 //Add the enemy
-                enemies.Add(new Enemy(tieFighterTexture, 80, 64, 7.5f, positionX, 1, false));
+                enemies.Add(new Enemy(texture, hitBoxX, hitBoxY, speed, positionX, lives, false));
             }
         }
-        private void SpawnBomber()
+        private void SpawnBoss(Texture2D texture, Stopwatch timer, int spawnTime, int hitBoxX, int hitBoxY, float speed, int lives)
         {
-            //Spawns bomber
-            int spawnrate = random.Next(50);
-            if (spawnrate == 0)
+            spawnTime = random.Next(spawnTime - 5, spawnTime + 5);
+            //Spawns the boss enemies
+            if (timer.Elapsed.Seconds >= spawnTime)
             {
                 //Get a random position over the screen
-                int positionX = random.Next(Game1.WindowWidth - 80);
+                int positionX = random.Next(Game1.WindowWidth - hitBoxX);
 
-                //Add the enemy
-                enemies.Add(new Enemy(bomberTexture, 90, 85, 4f, positionX, 5, false));
+                enemies.Add(new Enemy(texture, hitBoxX, hitBoxY, speed, positionX, lives, true));
+                timer.Restart();
             }
         }
-        private void SpawnInterceptor()
-        {
-            //Spawns interceptor
-            int spawnrate = random.Next(60);
-            if (spawnrate == 0)
-            {
-                //Get a random position over the screen
-                int positionX = random.Next(Game1.WindowWidth - 70);
 
-                //Add the enemy
-                enemies.Add(new Enemy(interceptorTexture, 70, 85, 10f, positionX, 3, false));
-            }
-        }
-        private void SpawnDevastator()
-        {
-            //Spawns devastator
-            int spawntime = 30;
-            if (devastatorTimer.Elapsed.Seconds >= spawntime)
-            {
-                //Get a random position over the screen
-                int positionX = random.Next(Game1.WindowWidth - 288);
-
-                enemies.Add(new Enemy(devastatorTexture, 288, 480, 0.5f, positionX, 30, true));
-                devastatorTimer.Restart();
-            }
-        }
-        private void SpawnAdvanced()
-        {
-            //Spawns devastator
-            int spawntime = 25;
-            if (devastatorTimer.Elapsed.Seconds >= spawntime)
-            {
-                //Get a random position over the screen
-                int positionX = random.Next(Game1.WindowWidth - 85);
-
-                enemies.Add(new Enemy(advancedTexture, 85, 69, 8.5f, positionX, 5, true));
-                devastatorTimer.Reset();
-            }
-        }
         private void CheckHitpoints()
         {
             //Check if the enemy has less than 1 hitpoint and if so mark is as not alive

@@ -135,7 +135,11 @@ namespace StarWars
             spriteBatch.End();
             base.Draw(gameTime);
         }
-
+        /// <summary>
+        /// This is checking if gameObjects are intersecting with eachother
+        /// and removes hitpoints and marks objects as no longer alive so they
+        /// will get removed from the game.
+        /// </summary>
         private void Collisions()
         {
             foreach (Enemy enemy in enemyHandler.Enemies)

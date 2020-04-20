@@ -21,11 +21,20 @@ namespace StarWars
             //Set the hitbox size
             hitbox.Size = new Point(hitboxX, hitboxY);
         }
+
+        /// <summary>
+        /// Allows the game to run logic such as updating the world,
+        /// checking for collisions, gathering input, and playing audio.
+        /// </summary>
         public virtual void Update()
         {
             //Set the hitbox to the position
             hitbox.Location = position.ToPoint();
         }
+
+        /// <summary>
+        /// This is called when the game should draw itself.
+        /// </summary>
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             //Draw the gameObejct with no extra color (Color.White)
