@@ -23,16 +23,10 @@ namespace StarWars
             this.player = player;
         }
 
-        public void Spawn()
-        {
-            //Get the width and height of the player hitbox
-            float width = player.Hitbox.Width;
-            float height = player.Hitbox.Height;
-
-            //Spawn 1 laser at each wing of the xwing
-            lasers.Add(new Laser(texture, player.Position + new Vector2(width * 0.035f, height * 0.25f), hitboxX, hitboxY, speed));
-            lasers.Add(new Laser(texture, player.Position + new Vector2(width - (width * 0.065f), height * 0.25f), hitboxX, hitboxY, speed));
-        }
+        /// <summary>
+        /// Allows the game to run logic such as updating the world,
+        /// checking for collisions, gathering input, and playing audio.
+        /// </summary>
         public void Update()
         {
             //Update the laser positions
@@ -45,12 +39,34 @@ namespace StarWars
             //Remove the lasers
             RemoveLasers();
         }
+
+        /// <summary>
+        /// This is called when the game should draw itself.
+        /// </summary>
         public void Draw(SpriteBatch spriteBatch)
         {
             //Draw the lasers
             foreach (Laser laser in lasers)
                 laser.Draw(spriteBatch);
         }
+
+        /// <summary>
+        /// Spawns lasers relative to the xwings position of its guns
+        /// </summary>
+        public void Spawn()
+        {
+            //Get the width and height of the player hitbox
+            float width = player.Hitbox.Width;
+            float height = player.Hitbox.Height;
+
+            //Spawn 1 laser at each wing of the xwing
+            lasers.Add(new Laser(texture, player.Position + new Vector2(width * 0.035f, height * 0.25f), hitboxX, hitboxY, speed));
+            lasers.Add(new Laser(texture, player.Position + new Vector2(width - (width * 0.065f), height * 0.25f), hitboxX, hitboxY, speed));
+        }
+
+        /// <summary>
+        /// Checks if a laser is above the window, if so mark is as no longer alive
+        /// </summary>
         private void CheckIfOutside()
         {
             //Set laser alive state to false if the laser is ouside of the screen
@@ -60,6 +76,10 @@ namespace StarWars
                     laser.Alive = false;
             }
         }
+
+        /// <summary>
+        /// Removing the lasers that no longer is alive
+        /// </summary>
         private void RemoveLasers()
         {
             //Make a new temp list to fill with lasers

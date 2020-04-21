@@ -15,15 +15,27 @@ namespace StarWars
             hitbox.Height = hitboxY;
         }
 
+        /// <summary>
+        /// Allows the game to run logic such as updating the world,
+        /// checking for collisions, gathering input, and playing audio.
+        /// </summary>
         public override void Update()
         {
             Move();
         }
+
+        /// <summary>
+        /// This is called when the game should draw itself.
+        /// </summary>
         public override void Draw(SpriteBatch spriteBatch)
         {
             //Draw the laser with red color overlay
             spriteBatch.Draw(texture, hitbox, Color.Red);
         }
+
+        /// <summary>
+        /// Moves the laser upwards with the movement speed of <c>speed</c>
+        /// </summary>
         private void Move()
         {
             //Move the lasers by its speed on the Y axis

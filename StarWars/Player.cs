@@ -30,13 +30,16 @@ namespace StarWars
             this.hitpoints = hitpoints;
         }
 
+        /// <summary>
+        /// Allows the game to run logic such as updating the world,
+        /// checking for collisions, gathering input, and playing audio.
+        /// </summary>
         public override void Update()
         {
             //Get the keyboard state of what buttons are pressed
             kNewState = Keyboard.GetState();
 
             Move();
-            
             Shoot();
 
             //Tell the laserHandler to update that lasers
@@ -47,6 +50,10 @@ namespace StarWars
             //Save the old keyboard state (to check if the input is a click) 
             kOldState = kNewState;
         }
+
+        /// <summary>
+        /// This is called when the game should draw itself.
+        /// </summary>
         public override void Draw(SpriteBatch spriteBatch)
         {
             //Draw the lasers through the laserHandler
@@ -56,6 +63,11 @@ namespace StarWars
             if (alive)
                 base.Draw(spriteBatch);
         }
+
+        /// <summary>
+        /// Moves the player right and left with the movement speed of <c>speed</c>
+        /// when A and D or Left and Right keys are pressed
+        /// </summary>
         private void Move()
         {
             //Move the player right when D or right arrow is pressed
@@ -76,12 +88,22 @@ namespace StarWars
             //Set the hitbox to the position
             hitbox.Location = position.ToPoint();
         }
+
+        /// <summary>
+        /// Spawn lasers with <c>laserHandler</c> when space is clicked,
+        /// holding the spacebar will only spawn once
+        /// </summary>
         private void Shoot()
         {
             //Spawn a laser (through the kaserHandler) if space is pressed, but not hold
             if (kNewState.IsKeyDown(Keys.Space) && kOldState.IsKeyUp(Keys.Space))
                 laserHandler.Spawn();
         }
+
+        /// <summary>
+        /// Checking how many hitpoints the player has left,
+        /// if it's less or equal than 0 then change to the game over scene
+        /// </summary>
         private void CheckHitpoints()
         {
             //Change player alive state to false if it has less than 1 hitpoints

@@ -20,12 +20,20 @@ namespace StarWars
 
             //Sets if the enemy must die before it goes outside of the screen
             this.mustDie = mustDie;
-    }
+        }
 
+        /// <summary>
+        /// Allows the game to run logic such as updating the world,
+        /// checking for collisions, gathering input, and playing audio.
+        /// </summary>
         public override void Update()
         {
             Move();
         }
+
+        /// <summary>
+        /// Moves the enemy downwards with the movement speed of <c>speed</c>
+        /// </summary>
         private void Move()
         {
             //Move the enemies downwards by its speed on the Y axis
