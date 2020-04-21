@@ -160,6 +160,7 @@ namespace StarWars
                     {
                         laser.Alive = false;
                         enemy.Hitpoints--;
+                        SpawnExplosions(laser.Position);
                     }
                 }
 
@@ -170,6 +171,10 @@ namespace StarWars
                     player.Hitpoints--;
                 }
             }
+        }
+        private void SpawnExplosions(Vector2 position)
+        {
+            explosionHandler.AddExplosion(position);
         }
     }
 }

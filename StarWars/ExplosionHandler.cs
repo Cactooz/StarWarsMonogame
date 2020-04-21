@@ -7,9 +7,8 @@ namespace StarWars.Content
     class ExplosionHandler
     {
         private Texture2D texture;
-        private Explosion explosion;
-        private Vector2 position;
-        private int rows, columns, currentFrame, totalFrames;
+
+        private int rows, columns;
 
         private List<Explosion> explosions = new List<Explosion>();
 
@@ -18,13 +17,10 @@ namespace StarWars.Content
             this.texture = texture;
             this.rows = rows;
             this.columns = columns;
-            totalFrames = rows * columns;
         }
 
         public void Update()
-        {
-            AddExplosion();
-
+        { 
             foreach (Explosion explosion in explosions)
                 explosion.Update();
 
@@ -33,21 +29,13 @@ namespace StarWars.Content
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            int width = texture.Width / columns;
-            int height = texture.Height / rows;
-            int row = currentFrame / columns;
-            int column = currentFrame % columns;
-
-            Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
-
-            spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
-
+            foreach (Explosion explosion in explosions)
+                explosion.Draw(spriteBatch);
         }
 
-        private void AddExplosion()
+        public void AddExplosion(Vector2 position)
         {
-            explosions.Add(new Explosion(texture, 15, 15));
+            explosions.Add(new Explosion(texture, 15, 15, position, rows, columns));
         }
         private void RemoveExplosion()
         {
