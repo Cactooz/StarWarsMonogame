@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using StarWars.Content;
 
 namespace StarWars
 {
@@ -9,20 +10,20 @@ namespace StarWars
     /// </summary>
     public class Game1 : Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        //Class objects
+        private GraphicsDeviceManager graphics;
+        private SpriteBatch spriteBatch;
+        private Player player;
+        private EnemyHandler enemyHandler;
+        private GameObject background;
+        private ExplosionHandler explosionHandler;
 
         //Declare variables for window size
         private static int windowWidth;
         private static int windowHeight;
 
         //Textures for the gameObjects
-        Texture2D xwingImg, tieFighterImg, devastatorImg, laser, backgroundImg, tieBomberImg, tieInterceptorImg, tieAdvancedImg;
-
-        //Class objects
-        Player player;
-        EnemyHandler enemyHandler;
-        GameObject background;
+        private Texture2D xwingImg, tieFighterImg, devastatorImg, laser, backgroundImg, tieBomberImg, tieInterceptorImg, tieAdvancedImg, expolsionImg;
 
         public Game1()
         {
@@ -72,12 +73,16 @@ namespace StarWars
             devastatorImg = Content.Load<Texture2D>("devastator");
             tieAdvancedImg = Content.Load<Texture2D>("tieadvanced");
             laser = Content.Load<Texture2D>("laser");
+            expolsionImg = Content.Load<Texture2D>("explosions");
 
-            //Creates the player xwing
+            //Creates the player
             player = new Player(xwingImg, (xwingImg.Width / 5), (xwingImg.Height / 5), 10f, 3, laser);
             //Creates enemyHandler object and sending in all enemy textures
             enemyHandler = new EnemyHandler(tieFighterImg, devastatorImg, tieBomberImg, tieInterceptorImg, tieAdvancedImg);
+            //Background image that sizes to fit window size
             background = new GameObject(backgroundImg, windowWidth, windowHeight);
+            //Creates explosionHandler and sending in image, column and rows
+            explosionHandler = new ExplosionHandler(expolsionImg, 8, 8);
         }
 
         /// <summary>
@@ -106,6 +111,8 @@ namespace StarWars
             enemyHandler.Spawn();
             enemyHandler.Update();
 
+            explosionHandler.Update();
+
             //Check collisions between gameobjects
             Collisions();
             
@@ -131,6 +138,8 @@ namespace StarWars
 
             //Draw the enemies
             enemyHandler.Draw(spriteBatch);
+
+            explosionHandler.Draw(spriteBatch, new Vector2(400, 200));
 
             spriteBatch.End();
             base.Draw(gameTime);

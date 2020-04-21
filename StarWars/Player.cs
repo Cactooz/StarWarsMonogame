@@ -16,6 +16,15 @@ namespace StarWars
 
         public LaserHandler LaserHandler { get => laserHandler; }
 
+        /// <summary>
+        /// Constructor for <c>Player</c>
+        /// </summary>
+        /// <param name="texture">Texture of the <c>player</c></param>
+        /// <param name="hitboxX">Hitbox width on the X axis</param>
+        /// <param name="hitboxY">Hitbox width on the Y axis</param>
+        /// <param name="speed">Movement speed</param>
+        /// <param name="hitpoints">How many hitpoints the <c>enemy</c> have</param>
+        /// <param name="laserTexture">Texture for the <c>laser</c></param>
         public Player(Texture2D texture, int hitboxX, int hitboxY, float speed, int hitpoints, Texture2D laserTexture):base(texture, hitboxX, hitboxY, speed)
         {
             //Set the start position

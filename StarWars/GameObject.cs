@@ -10,9 +10,21 @@ namespace StarWars
         protected Vector2 position;
         protected Rectangle hitbox;
 
+        /// <summary>
+        /// Position of the <c>GameObject</c>
+        /// </summary>
         public Vector2 Position { get => position; set => position = value; }
+        /// <summary>
+        /// Hitbox for the <c>GameObject</c>
+        /// </summary>
         public Rectangle Hitbox { get => hitbox; }
 
+        /// <summary>
+        /// Constructor for <c>GameObject</c>
+        /// </summary>
+        /// <param name="texture">Texture of the <c>entity</c></param>
+        /// <param name="hitboxX">Hitbox width on the X axis</param>
+        /// <param name="hitboxY">Hitbox width on the Y axis</param>
         public GameObject(Texture2D texture, int hitboxX, int hitboxY)
         {
             //Load the textures and position

@@ -7,8 +7,21 @@ namespace StarWars
     {
         private bool mustDie = false;
 
+        /// <summary>
+        /// If the <c>enemy</c> must die before it goes outside of the screen
+        /// </summary>
         public bool MustDie { get => mustDie; }
 
+        /// <summary>
+        /// Constructor for <c>Enemy</c>
+        /// </summary>
+        /// <param name="texture">Texture of the <c>enemy</c></param>
+        /// <param name="hitboxX">Hitbox width on the X axis</param>
+        /// <param name="hitboxY">Hitbox width on the Y axis</param>
+        /// <param name="speed">Movement speed</param>
+        /// <param name="positionX">Start X position</param>
+        /// <param name="hitpoints">How many hitpoints the <c>enemy</c> have</param>
+        /// <param name="mustDie">If the <c>enemy</c> must die before it goes outside of the screen</param>
         public Enemy(Texture2D texture, int hitboxX, int hitboxY, float speed, int positionX, int hitpoints, bool mustDie):base(texture, hitboxX, hitboxY, speed)
         {
             //Set the position of the enemy

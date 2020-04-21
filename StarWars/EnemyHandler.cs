@@ -7,17 +7,28 @@ namespace StarWars
 {
     class EnemyHandler
     {
-        Random random = new Random();
+        private Random random = new Random();
 
         //Add a stopwatch timer that will keep track of time
-        Stopwatch devastatorTimer = Stopwatch.StartNew();
-        Stopwatch advancedTimer = Stopwatch.StartNew();
+        private Stopwatch devastatorTimer = Stopwatch.StartNew();
+        private Stopwatch advancedTimer = Stopwatch.StartNew();
 
         private List<Enemy> enemies = new List<Enemy>();
         private Texture2D tieFighterTexture, devastatorTexture, bomberTexture, interceptorTexture, advancedTexture;
 
+        /// <summary>
+        /// List containing all enemies
+        /// </summary>
         public List<Enemy> Enemies { get => enemies; set => enemies = value; }
 
+        /// <summary>
+        /// Constructor for <c>EnemyHandler</c>
+        /// </summary>
+        /// <param name="tieFighterTexture">Texture for tieFighter</param>
+        /// <param name="devastatorTexture">Texture for devastator</param>
+        /// <param name="bomberTexture">Texture for tieBomber</param>
+        /// <param name="interceptorTexture">Texture for tieInterceptor</param>
+        /// <param name="advancedTexture">Texture for tieAdvanced</param>
         public EnemyHandler(Texture2D tieFighterTexture, Texture2D devastatorTexture, Texture2D bomberTexture, Texture2D interceptorTexture, Texture2D advancedTexture)
         {
             //Add the textures for all enemies
@@ -58,7 +69,7 @@ namespace StarWars
         }
 
         /// <summary>
-        /// Spawns enemies using SpawnNormal() and SpawnBoss() methods
+        /// Spawns enemies using <c>SpawnNormal()</c> and <c>SpawnBoss()</c> methods
         /// </summary>
         public void Spawn()
         {
@@ -79,7 +90,7 @@ namespace StarWars
         /// before they exit the bottom of the screen
         /// </summary>
         /// <param name="texture">Texture of the enemy</param>
-        /// <param name="spawnAmount">How many enemies that should spawn
+        /// <param name="spawnAmount">How many enemies that should spawn,
         /// lower value = more spawns, higher value = low spawns</param>
         /// <param name="hitBoxX">Hitbox size on the x axis</param>
         /// <param name="hitBoxY">Hitbox size on the y axis</param>

@@ -13,9 +13,17 @@ namespace StarWars
         private float speed = 10f;
         private int hitboxX = 5;
         private int hitboxY = 10;
-         
+        
+        /// <summary>
+        /// List containing all lasers
+        /// </summary>
         public List<Laser> Lasers { get => lasers; set => lasers = value; }
 
+        /// <summary>
+        /// Constructor for <c>LaserHandler</c>
+        /// </summary>
+        /// <param name="texture">Texture of the <c>laser</c></param>
+        /// <param name="player"><c>player</c> object</param>
         public LaserHandler(Texture2D texture, Player player)
         {
             this.texture = texture;

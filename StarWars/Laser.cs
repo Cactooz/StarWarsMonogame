@@ -5,6 +5,14 @@ namespace StarWars
 {
     class Laser:Entity
     {
+        /// <summary>
+        /// Constructor for <c>Laser</c>
+        /// </summary>
+        /// <param name="texture">Texture of the <c>laser</c></param>
+        /// <param name="position">Position of the <c>laser</c></param>
+        /// <param name="hitboxX">Hitbox width on the X axis</param>
+        /// <param name="hitboxY">Hitbox width on the Y axis</param>
+        /// <param name="speed">Movement speed</param>
         public Laser(Texture2D texture, Vector2 position, int hitboxX, int hitboxY, float speed):base(texture, hitboxX, hitboxY, speed)
         {
             //Set the position of the laser
