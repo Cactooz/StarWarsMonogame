@@ -13,3 +13,6 @@ Used as Textures for the different ships in the game
 * [Tie Interceptor](https://sketchfab.com/3d-models/star-wars-tie-interceptor-27af6a0dbbec45fc8c497aa691f3042a)
 * [Devastator](https://sketchfab.com/3d-models/invictus-class-star-cruiser-8ba24769c02b401d88f50655505c92be)
 * [Vulture Droid](https://sketchfab.com/3d-models/star-wars-vulture-droid-1a6bc6ba28174d1e835e4f09af487c84)
+
+### Expolosion
+* https://opengameart.org/content/2d-explosion-animations-frame-by-frame
