@@ -13,7 +13,9 @@ namespace StarWars
         private Stopwatch devastatorTimer = Stopwatch.StartNew();
         private Stopwatch advancedTimer = Stopwatch.StartNew();
 
+        //List containing all enemies
         private List<Enemy> enemies = new List<Enemy>();
+
         private Texture2D tieFighterTexture, devastatorTexture, bomberTexture, interceptorTexture, advancedTexture;
 
         /// <summary>
@@ -49,6 +51,9 @@ namespace StarWars
         /// </summary>
         public void Update()
         {
+            //Spawn enemies
+            Spawn();
+
             //Update the enemies
             foreach (Enemy enemy in enemies)
                 enemy.Update();
@@ -71,7 +76,7 @@ namespace StarWars
         /// <summary>
         /// Spawns enemies using <c>SpawnNormal()</c> and <c>SpawnBoss()</c> methods
         /// </summary>
-        public void Spawn()
+        private void Spawn()
         {
             //Spawn normal enemies
             //Layout: texture, spawnAmount, hitBoxX, hitBoxY, speed, lives

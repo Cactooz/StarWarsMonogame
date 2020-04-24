@@ -72,6 +72,8 @@
     <Compile Include="Laser.cs" />
     <Compile Include="LaserHandler.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="Powerup.cs" />
+    <Compile Include="PowerupHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -6,14 +6,16 @@ namespace StarWars
 {
     class LaserHandler
     {
-        private Texture2D texture;
-        private List<Laser> lasers = new List<Laser>();
         private Player player;
 
+        private Texture2D texture;
         private float speed = 10f;
         private int hitboxX = 5;
         private int hitboxY = 10;
-        
+
+        //List containing all lasers
+        private List<Laser> lasers = new List<Laser>();
+
         /// <summary>
         /// List containing all lasers
         /// </summary>

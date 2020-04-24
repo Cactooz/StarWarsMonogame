@@ -12,7 +12,7 @@ namespace StarWars
         public bool IsAnimating { get => isAnimating; }
         public int CurrentFram { get => currentFrame; }
 
-        public Explosion(Texture2D texture, int hitboxX, int hitboxY, Vector2 position, int rows, int columns) :base(texture, hitboxX, hitboxY)
+        public Explosion(Texture2D texture, int hitboxX, int hitboxY, Vector2 position, int rows, int columns):base(texture, hitboxX, hitboxY)
         {
             Position = position;
 
@@ -24,6 +24,8 @@ namespace StarWars
         public override void Update()
         {
             currentFrame++;
+
+            CheckCompletion();
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -31,13 +33,18 @@ namespace StarWars
             int blockHeight = texture.Height / rows;
             int blockRow = currentFrame / columns;
             int blockColumn = currentFrame % columns;
-            int positionX = Convert.ToInt32(position.X) - 110;
-            int positionY = Convert.ToInt32(position.Y) - 110 ;
+            int positionX = Convert.ToInt32(position.X) - (blockWidth / 2);
+            int positionY = Convert.ToInt32(position.Y) - (blockHeight / 2);
 
             Rectangle sourceRectangle = new Rectangle(blockWidth * blockColumn, blockHeight * blockRow, blockWidth, blockHeight);
             Rectangle destinationRectangle = new Rectangle(positionX, positionY, blockWidth, blockHeight);
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
+        }
+        private void CheckCompletion()
+        {
+            if (currentFrame >= totalFrames)
+                isAnimating = false;
         }
     }
 }

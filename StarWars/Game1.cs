@@ -17,13 +17,14 @@ namespace StarWars
         private EnemyHandler enemyHandler;
         private GameObject background;
         private ExplosionHandler explosionHandler;
+        private PowerupHandler powerupHandler;
 
         //Declare variables for window size
         private static int windowWidth;
         private static int windowHeight;
 
         //Textures for the gameObjects
-        private Texture2D xwingImg, tieFighterImg, devastatorImg, laser, backgroundImg, tieBomberImg, tieInterceptorImg, tieAdvancedImg, expolsionImg;
+        private Texture2D xwingImg, tieFighterImg, devastatorImg, laser, backgroundImg, tieBomberImg, tieInterceptorImg, tieAdvancedImg, expolsionImg1, expolsionImg2, powerupWingsImg, powerupLivesImg;
 
         public Game1()
         {
@@ -73,7 +74,10 @@ namespace StarWars
             devastatorImg = Content.Load<Texture2D>("devastator");
             tieAdvancedImg = Content.Load<Texture2D>("tieadvanced");
             laser = Content.Load<Texture2D>("laser");
-            expolsionImg = Content.Load<Texture2D>("explosions");
+            expolsionImg1 = Content.Load<Texture2D>("explosion1");
+            expolsionImg2 = Content.Load<Texture2D>("explosion2");
+            powerupWingsImg = Content.Load<Texture2D>("powerup4wing");
+            powerupLivesImg = Content.Load<Texture2D>("powerupHeart");
 
             //Creates the player
             player = new Player(xwingImg, (xwingImg.Width / 5), (xwingImg.Height / 5), 10f, 3, laser);
@@ -82,7 +86,9 @@ namespace StarWars
             //Background image that sizes to fit window size
             background = new GameObject(backgroundImg, windowWidth, windowHeight);
             //Creates explosionHandler and sending in image, column and rows
-            explosionHandler = new ExplosionHandler(expolsionImg, 8, 8);
+            explosionHandler = new ExplosionHandler(expolsionImg1, expolsionImg2, 8, 8);
+            //Creates powerupHandler with powerup images
+            powerupHandler = new PowerupHandler(powerupWingsImg, powerupLivesImg);
         }
 
         /// <summary>
@@ -107,10 +113,13 @@ namespace StarWars
             //Update the player
             player.Update();
 
-            //Spawn enemies and update them
-            enemyHandler.Spawn();
+            //Update the enemies
             enemyHandler.Update();
 
+            //Update the powerups
+            powerupHandler.Update();
+
+            //Update the explosions
             explosionHandler.Update();
 
             //Check collisions between gameobjects
@@ -139,8 +148,11 @@ namespace StarWars
             //Draw the enemies
             enemyHandler.Draw(spriteBatch);
 
-            explosionHandler.Draw(spriteBatch, new Vector2(400, 200));
+            //Draws the powerups
+            powerupHandler.Draw(spriteBatch);
 
+            //Draws the expolisions (should be last)
+            explosionHandler.Draw(spriteBatch, new Vector2(400, 200));
             spriteBatch.End();
             base.Draw(gameTime);
         }

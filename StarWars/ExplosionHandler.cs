@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
@@ -6,15 +7,18 @@ namespace StarWars.Content
 {
     class ExplosionHandler
     {
-        private Texture2D texture;
+        private Random random = new Random();
 
+        private Texture2D texture1, texture2;
         private int rows, columns;
 
+        //List containing all expolosions
         private List<Explosion> explosions = new List<Explosion>();
 
-        public ExplosionHandler(Texture2D texture, int rows, int columns)
+        public ExplosionHandler(Texture2D texture1, Texture2D texture2, int rows, int columns)
         {
-            this.texture = texture;
+            this.texture1 = texture1;
+            this.texture2 = texture2;
             this.rows = rows;
             this.columns = columns;
         }
@@ -35,7 +39,11 @@ namespace StarWars.Content
 
         public void AddExplosion(Vector2 position)
         {
-            explosions.Add(new Explosion(texture, 15, 15, position, rows, columns));
+            int textureNumber = random.Next(1, 3);
+            if (textureNumber == 1)
+                explosions.Add(new Explosion(texture1, 15, 15, position, rows, columns));
+            else
+                explosions.Add(new Explosion(texture2, 15, 15, position, rows, columns));
         }
         private void RemoveExplosion()
         {
