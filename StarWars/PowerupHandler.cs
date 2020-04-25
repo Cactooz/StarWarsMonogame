@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
 
 namespace StarWars
 {
@@ -20,6 +19,11 @@ namespace StarWars
 
         //List cotaining all powerups
         private List<Powerup> powerups = new List<Powerup>();
+
+        /// <summary>
+        /// List containing all powerups
+        /// </summary>
+        public List<Powerup> Powerups { get => powerups; }
 
         /// <summary>
         /// Constructor for PowerupHandler
@@ -62,11 +66,15 @@ namespace StarWars
         /// </summary>
         private void Spawn()
         {
-            int spawnTime = random.Next(10, 30);
+            int spawnTime = random.Next(10, 20);
             if (spawnTimer.Elapsed.Seconds >= spawnTime)
             {
+                int powerupType = random.Next(2);
                 int positionX = random.Next(Game1.WindowWidth - hitboxX);
-                powerups.Add(new Powerup(texture4wings, hitboxX, hitboxY, speed, positionX));
+                if (powerupType == 0)
+                    powerups.Add(new Powerup(texture4wings, hitboxX, hitboxY, speed, positionX, powerupType));
+                else
+                    powerups.Add(new Powerup(textureLives, hitboxX, hitboxY, speed, positionX, powerupType));
                 spawnTimer.Restart();
             }
         }

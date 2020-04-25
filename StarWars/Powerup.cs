@@ -5,6 +5,13 @@ namespace StarWars
 {
     class Powerup:Entity
     {
+        private int powerupType;
+
+        /// <summary>
+        /// The type of the <c>powerup</c>
+        /// </summary>
+        public int PowerupType { get => powerupType; }
+
         /// <summary>
         /// Constructor for <c>Powerup</c>
         /// </summary>
@@ -13,11 +20,13 @@ namespace StarWars
         /// <param name="hitboxY">Hitbox width on the Y axis</param>
         /// <param name="speed">Movement speed</param>
         /// <param name="positionX">Start X position</param>
-        public Powerup(Texture2D texture, int hitboxX, int hitboxY, float speed, int positionX) : base(texture, hitboxX, hitboxY, speed)
+        /// <param name="powerupType">The type of <c>powerup</c></param>
+        public Powerup(Texture2D texture, int hitboxX, int hitboxY, float speed, int positionX, int powerupType):base(texture, hitboxX, hitboxY, speed)
         {
             //Set the position of the powerup
             position.X = positionX;
             position.Y = -50 - hitboxY;
+            this.powerupType = powerupType + 1; //+1 since default state is 0
         }
 
         /// <summary>

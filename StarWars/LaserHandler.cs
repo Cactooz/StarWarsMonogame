@@ -69,9 +69,20 @@ namespace StarWars
             float width = player.Hitbox.Width;
             float height = player.Hitbox.Height;
 
-            //Spawn 1 laser at each wing of the xwing
-            lasers.Add(new Laser(texture, player.Position + new Vector2(width * 0.035f, height * 0.25f), hitboxX, hitboxY, speed));
-            lasers.Add(new Laser(texture, player.Position + new Vector2(width - (width * 0.065f), height * 0.25f), hitboxX, hitboxY, speed));
+            if (player.Has4wings)
+            {
+                //Spawn 1 laser at each wing of the xwing
+                lasers.Add(new Laser(texture, player.Position + new Vector2(width * 0.033f, height * 0.265f), hitboxX, hitboxY, speed));
+                lasers.Add(new Laser(texture, player.Position + new Vector2(width * 0.1f, height * 0.325f), hitboxX, hitboxY, speed));
+                lasers.Add(new Laser(texture, player.Position + new Vector2(width - (width * 0.065f), height * 0.265f), hitboxX, hitboxY, speed));
+                lasers.Add(new Laser(texture, player.Position + new Vector2(width - (width * 0.13f), height * 0.325f), hitboxX, hitboxY, speed));
+            }
+            else
+            {
+                //Spawn 1 laser at each wing of the xwing
+                lasers.Add(new Laser(texture, player.Position + new Vector2(width * 0.035f, height * 0.25f), hitboxX, hitboxY, speed));
+                lasers.Add(new Laser(texture, player.Position + new Vector2(width - (width * 0.065f), height * 0.25f), hitboxX, hitboxY, speed));
+            }
         }
 
         /// <summary>

@@ -24,7 +24,7 @@ namespace StarWars
         private static int windowHeight;
 
         //Textures for the gameObjects
-        private Texture2D xwingImg, tieFighterImg, devastatorImg, laser, backgroundImg, tieBomberImg, tieInterceptorImg, tieAdvancedImg, expolsionImg1, expolsionImg2, powerupWingsImg, powerupLivesImg;
+        private Texture2D xwingImg, xwingFullImg, tieFighterImg, devastatorImg, laser, backgroundImg, tieBomberImg, tieInterceptorImg, tieAdvancedImg, expolsionImg1, expolsionImg2, powerupWingsImg, powerupLivesImg;
 
         public Game1()
         {
@@ -68,6 +68,7 @@ namespace StarWars
             //Load in textures for the gameObjects
             backgroundImg = Content.Load<Texture2D>("stars");
             xwingImg = Content.Load<Texture2D>("xwing");
+            xwingFullImg = Content.Load<Texture2D>("xwingFull");
             tieFighterImg = Content.Load<Texture2D>("tiefighter");
             tieBomberImg = Content.Load<Texture2D>("tiebomber");
             tieInterceptorImg = Content.Load<Texture2D>("tieinterceptor");
@@ -80,7 +81,7 @@ namespace StarWars
             powerupLivesImg = Content.Load<Texture2D>("powerupHeart");
 
             //Creates the player
-            player = new Player(xwingImg, (xwingImg.Width / 5), (xwingImg.Height / 5), 10f, 3, laser);
+            player = new Player(xwingImg, xwingFullImg, (xwingImg.Width / 5), (xwingImg.Height / 5), 10f, 3, laser);
             //Creates enemyHandler object and sending in all enemy textures
             enemyHandler = new EnemyHandler(tieFighterImg, devastatorImg, tieBomberImg, tieInterceptorImg, tieAdvancedImg);
             //Background image that sizes to fit window size
@@ -145,21 +146,21 @@ namespace StarWars
             //Draw the xwing
             player.Draw(spriteBatch);
 
-            //Draw the enemies
-            enemyHandler.Draw(spriteBatch);
-
             //Draws the powerups
             powerupHandler.Draw(spriteBatch);
 
+            //Draw the enemies
+            enemyHandler.Draw(spriteBatch);
+
             //Draws the expolisions (should be last)
             explosionHandler.Draw(spriteBatch, new Vector2(400, 200));
+
             spriteBatch.End();
             base.Draw(gameTime);
         }
         /// <summary>
         /// This is checking if gameObjects are intersecting with eachother
-        /// and removes hitpoints and marks objects as no longer alive so they
-        /// will get removed from the game.
+        /// and executes actions such as removing hitpoints and marks objects as no longer alive.
         /// </summary>
         private void Collisions()
         {
@@ -183,7 +184,20 @@ namespace StarWars
                     player.Hitpoints--;
                 }
             }
+            foreach (Powerup powerup in powerupHandler.Powerups)
+            {
+                //Check if the player hits a powerup
+                if (player.Hitbox.Intersects(powerup.Hitbox))
+                {
+                    player.PowerupState = powerup.PowerupType;
+                    powerup.Alive = false;
+                }
+            }
         }
+        /// <summary>
+        /// Spawns one of two different explosions at the defined position
+        /// </summary>
+        /// <param name="position">The position where the middle of the explosion should spawn</param>
         private void SpawnExplosions(Vector2 position)
         {
             explosionHandler.AddExplosion(position);
