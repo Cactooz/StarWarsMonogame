@@ -12,6 +12,7 @@ namespace StarWars
         //Add a stopwatch timer that will keep track of time
         private Stopwatch devastatorTimer = Stopwatch.StartNew();
         private Stopwatch advancedTimer = Stopwatch.StartNew();
+        private Stopwatch elapsedTimer = Stopwatch.StartNew();
 
         //List containing all enemies
         private List<Enemy> enemies = new List<Enemy>();
@@ -61,6 +62,10 @@ namespace StarWars
             CheckHitpoints();
             CheckIfOutside();
             RemoveEnemies();
+
+            //ElapsedTimer is not used after 30 seconds of gameplay, so stop it
+            if (elapsedTimer.Elapsed.Seconds > 30)
+                elapsedTimer.Stop();
         }
 
         /// <summary>
@@ -86,7 +91,7 @@ namespace StarWars
 
             //Spawn boss enemies (that must die)
             //Layout: texture, timer, spawnTime, hitBoxX, hitBoxY, speed, lives
-            SpawnBoss(devastatorTexture, devastatorTimer, 35, 288, 480, 0.5f, 30);
+            SpawnBoss(devastatorTexture, devastatorTimer, 35, 288, 480, 0.5f, 50);
             SpawnBoss(advancedTexture, advancedTimer, 60, 85, 69, 5f, 5);
         }
 
@@ -96,15 +101,23 @@ namespace StarWars
         /// </summary>
         /// <param name="texture">Texture of the enemy</param>
         /// <param name="spawnAmount">How many enemies that should spawn,
-        /// lower value = more spawns, higher value = low spawns</param>
+        /// lower value = more spawns, higher value = less spawns</param>
         /// <param name="hitBoxX">Hitbox size on the x axis</param>
         /// <param name="hitBoxY">Hitbox size on the y axis</param>
         /// <param name="speed">The movement speed of the enemy</param>
         /// <param name="lives">How many lives the enemy have</param>
         private void SpawnNormal(Texture2D texture, int spawnAmount, int hitBoxX, int hitBoxY, float speed, int lives)
         {
-            //Spawns normal enemies
+            //Temporary spawnAmount saver if the new spawnAmount is less than the original spawnAmount
+            int originalSpawnAmount = spawnAmount;
+
+            //Make the spawnAmount grow over time, but never bigger than the set original spawnAmount
+            spawnAmount = 150 - (spawnAmount * (elapsedTimer.Elapsed.Seconds / 2));
+            if (spawnAmount < originalSpawnAmount)
+                spawnAmount = originalSpawnAmount;
+
             int spawnrate = random.Next(spawnAmount);
+            //Spawns normal enemies
             if (spawnrate == 0)
             {
                 //Get a random position over the screen

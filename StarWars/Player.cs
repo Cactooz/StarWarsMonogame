@@ -18,7 +18,7 @@ namespace StarWars
         private Texture2D laserTexture;
         //Texture for the xwing when it has both wings out
         private Texture2D texture4wings;
-        private bool has4wings = false;
+        private bool has4wings;
         private int powerupState = 0;
 
         //Add a stopwatch timer that will keep track of time when the powerups should be removed
@@ -168,8 +168,8 @@ namespace StarWars
                 //If a powerup with the state of 1 is picked up
                 if (powerupState == 1)
                 {
-                    //Start the removal timer
-                    powerupRemoveTimer.Start();
+                    //Restart the timer instead of starting it, because the timer might already be running
+                    powerupRemoveTimer.Restart();
 
                     has4wings = true;
 
