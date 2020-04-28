@@ -111,11 +111,11 @@ namespace StarWars
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            //Update the player
-            player.Update();
-
             //Update the enemies
             enemyHandler.Update();
+
+            //Update the player
+            player.Update();
 
             //Update the powerups
             powerupHandler.Update();
@@ -177,11 +177,12 @@ namespace StarWars
                     }
                 }
 
-                //Remove enemies that the player hits
+                //Remove enemies that the player hits and remove player hitpoints
                 if (player.Hitbox.Intersects(enemy.Hitbox))
                 {
-                    enemy.Hitpoints--;
+                    enemy.Alive = false;
                     player.Hitpoints--;
+                    SpawnExplosions(enemy.Position);
                 }
             }
             foreach (Powerup powerup in powerupHandler.Powerups)

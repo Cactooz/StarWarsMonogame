@@ -15,6 +15,13 @@ namespace StarWars.Content
         //List containing all expolosions
         private List<Explosion> explosions = new List<Explosion>();
 
+        /// <summary>
+        /// Constructor for <c>ExplosionHandler</c>
+        /// </summary>
+        /// <param name="texture1">First explosion texture</param>
+        /// <param name="texture2">Second explosion texture</param>
+        /// <param name="rows">Animation rows of the textures</param>
+        /// <param name="columns">Animation columns of the textures</param>
         public ExplosionHandler(Texture2D texture1, Texture2D texture2, int rows, int columns)
         {
             this.texture1 = texture1;
@@ -23,6 +30,10 @@ namespace StarWars.Content
             this.columns = columns;
         }
 
+        /// <summary>
+        /// Allows the game to run logic such as updating the world,
+        /// checking for collisions, gathering input, and playing audio.
+        /// </summary>
         public void Update()
         { 
             foreach (Explosion explosion in explosions)
@@ -31,12 +42,19 @@ namespace StarWars.Content
             RemoveExplosion();
         }
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 location)
+        /// <summary>
+        /// This is called when the game should draw itself.
+        /// </summary>
+        public void Draw(SpriteBatch spriteBatch)
         {
             foreach (Explosion explosion in explosions)
                 explosion.Draw(spriteBatch);
         }
 
+        /// <summary>
+        /// Adds a explosion, randomizing between teo textures
+        /// </summary>
+        /// <param name="position">The position of the explosion</param>
         public void AddExplosion(Vector2 position)
         {
             int textureNumber = random.Next(1, 3);
@@ -45,6 +63,10 @@ namespace StarWars.Content
             else
                 explosions.Add(new Explosion(texture2, 15, 15, position, rows, columns));
         }
+
+        /// <summary>
+        /// Removes the explosion when its done animating
+        /// </summary>
         private void RemoveExplosion()
         {
             //A temporary list to fill with explosions

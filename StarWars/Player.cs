@@ -107,6 +107,8 @@ namespace StarWars
                 base.Draw(spriteBatch);
             else if (alive && has4wings)
                 spriteBatch.Draw(texture4wings, hitbox, Color.White);
+
+            DrawHitpoints(spriteBatch);
         }
 
         /// <summary>
@@ -122,7 +124,7 @@ namespace StarWars
                 if (Position.X < Game1.WindowWidth - Hitbox.Width)
                     position.X += speed;
             }
-            //Move the player left when A or left arrow i pressed
+            //Move the player left when A or left arrow is pressed
             if (kNewState.IsKeyDown(Keys.A) || kNewState.IsKeyDown(Keys.Left))
             {
                 //Makes sure the player doesn't go outside of the screen
@@ -209,6 +211,20 @@ namespace StarWars
                 //Remove 4 wings
                 has4wings = false;
             }
+        }
+
+        /// <summary>
+        /// Draws how many <c>hitpoints</c> the <c>player</c> currently has, at the top left of the screen
+        /// </summary>
+        private void DrawHitpoints(SpriteBatch spriteBatch)
+        {
+            //Check if the player is alive so it does not show hitpoints after death
+            if (alive)
+                //Draw one hitpoint sprite for each hitpoint
+                for (int i = 0; i < hitpoints; i++)
+                {
+                    spriteBatch.Draw(texture4wings, new Rectangle(10 * (i + 1) + i * 50, 10, 50, 50), Color.White);
+                }
         }
     }
 }
