@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using StarWars.Content;
 
 namespace StarWars
 {
@@ -153,7 +152,7 @@ namespace StarWars
             enemyHandler.Draw(spriteBatch);
 
             //Draws the expolisions (should be last)
-            explosionHandler.Draw(spriteBatch, new Vector2(400, 200));
+            explosionHandler.Draw(spriteBatch);
 
             spriteBatch.End();
             base.Draw(gameTime);
@@ -182,7 +181,9 @@ namespace StarWars
                 {
                     enemy.Alive = false;
                     player.Hitpoints--;
-                    SpawnExplosions(enemy.Position);
+
+                    //Spawn an explosion at the bottom middle of the enemy
+                    SpawnExplosions(new Vector2(enemy.Position.X + (enemy.Hitbox.Width / 2), enemy.Position.Y + enemy.Hitbox.Height));
                 }
             }
             foreach (Powerup powerup in powerupHandler.Powerups)

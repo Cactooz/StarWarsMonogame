@@ -86,7 +86,7 @@ namespace StarWars
             //Spawn normal enemies
             //Layout: texture, spawnAmount, hitBoxX, hitBoxY, speed, lives
             SpawnNormal(tieFighterTexture, 15, 80, 64, 7.5f, 1);
-            SpawnNormal(bomberTexture, 50, 90, 95, 4f, 5);
+            SpawnNormal(bomberTexture, 50, 95, 90, 4f, 5);
             SpawnNormal(interceptorTexture, 60, 70, 85, 10f, 3);
 
             //Spawn boss enemies (that must die)
