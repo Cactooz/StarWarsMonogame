@@ -61,6 +61,13 @@
 /processorParam:TextureFormat=Color
 /build:laser.png
 
+#begin mainfont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:mainfont.spritefont
+
 #begin powerup4wing.png
 /importer:TextureImporter
 /processor:TextureProcessor

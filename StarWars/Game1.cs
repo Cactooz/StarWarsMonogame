@@ -25,6 +25,10 @@ namespace StarWars
         //Textures for the gameObjects
         private Texture2D xwingImg, xwingFullImg, tieFighterImg, devastatorImg, laser, backgroundImg, tieBomberImg, tieInterceptorImg, tieAdvancedImg, expolsionImg1, expolsionImg2, powerupWingsImg, powerupLivesImg;
 
+        //Font for the game
+        private SpriteFont font;
+        private int totalPoints = 0;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -89,6 +93,9 @@ namespace StarWars
             explosionHandler = new ExplosionHandler(expolsionImg1, expolsionImg2, 8, 8);
             //Creates powerupHandler with powerup images
             powerupHandler = new PowerupHandler(powerupWingsImg, powerupLivesImg);
+
+            //Load in the font
+            font = Content.Load<SpriteFont>("mainfont");
         }
 
         /// <summary>
@@ -142,17 +149,19 @@ namespace StarWars
             //Draw the background stars
             background.Draw(spriteBatch);
 
-            //Draw the xwing
-            player.Draw(spriteBatch);
-
             //Draws the powerups
             powerupHandler.Draw(spriteBatch);
 
             //Draw the enemies
             enemyHandler.Draw(spriteBatch);
 
+            //Draw the xwing
+            player.Draw(spriteBatch);
+
             //Draws the expolisions (should be last)
             explosionHandler.Draw(spriteBatch);
+
+            spriteBatch.DrawString(font, $"Score: {totalPoints}", new Vector2(10, 75), Color.White);
 
             spriteBatch.End();
             base.Draw(gameTime);
@@ -170,6 +179,9 @@ namespace StarWars
                     //Remove lasers that hits enemies and remove the enemy that gets hit
                     if (laser.Hitbox.Intersects(enemy.Hitbox))
                     {
+                        //Add as many points as the enemy has hitpoints left
+                        AddPoints(enemy.Hitpoints);
+
                         laser.Alive = false;
                         enemy.Hitpoints--;
                         SpawnExplosions(laser.Position);
@@ -184,6 +196,9 @@ namespace StarWars
 
                     //Spawn an explosion at the bottom middle of the enemy
                     SpawnExplosions(new Vector2(enemy.Position.X + (enemy.Hitbox.Width / 2), enemy.Position.Y + enemy.Hitbox.Height));
+
+                    //Add netagive points to remove points from the totalpoints
+                    AddPoints(-100);
                 }
             }
             foreach (Powerup powerup in powerupHandler.Powerups)
@@ -193,6 +208,9 @@ namespace StarWars
                 {
                     player.PowerupState = powerup.PowerupType;
                     powerup.Alive = false;
+
+                    //Add points when a powerup is picked up
+                    AddPoints(25);
                 }
             }
         }
@@ -203,6 +221,15 @@ namespace StarWars
         private void SpawnExplosions(Vector2 position)
         {
             explosionHandler.AddExplosion(position);
+        }
+
+        /// <summary>
+        /// Add points to the int <c>totalPoints</c> that is displayed in the top left of the screen
+        /// </summary>
+        /// <param name="points">Points that should be added to the <c>totalPoints</c></param>
+        private void AddPoints(int points)
+        {
+            totalPoints += points;
         }
     }
 }
