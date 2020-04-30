@@ -13,6 +13,29 @@ Used as Textures for the different ships in the game
 * [Tie Interceptor](https://sketchfab.com/3d-models/star-wars-tie-interceptor-27af6a0dbbec45fc8c497aa691f3042a)
 * [Devastator](https://sketchfab.com/3d-models/invictus-class-star-cruiser-8ba24769c02b401d88f50655505c92be)
 * [Vulture Droid](https://sketchfab.com/3d-models/star-wars-vulture-droid-1a6bc6ba28174d1e835e4f09af487c84)
+* [Slave 1](https://sketchfab.com/3d-models/slave1-709235d3ffa54e90b378740d474e4a7b)
+* [Lambda T-4a Shuttle](https://sketchfab.com/3d-models/lambda-t-a-shuttle-5b570acb31e04d80adf970bac2c4f661)
 
 ### Expolosion
 * https://opengameart.org/content/2d-explosion-animations-frame-by-frame
+
+### Planets
+* Alderaan
+* Bespin
+* Coruscant
+* Death Star I
+* Death Star II
+* Endor
+* Geonosis
+* Hoth
+* Jakku
+* Jedha
+* Kamino
+* Kashyyyk
+* Mustafar
+* Naboo (2 versions)
+* Scarrif
+* Star Killer Base
+* Tatooine
+* Yavin
+* Yavin IV
