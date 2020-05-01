@@ -97,11 +97,11 @@ namespace StarWars
                     DrawFont(spriteBatch);
                     break;
                 case State.Hover:
-                    spriteBatch.Draw(texture, hitbox, Color.Blue);
+                    spriteBatch.Draw(texture, hitbox, Color.LightGray);
                     DrawFont(spriteBatch); 
                     break;
                 case State.Clicked:
-                    spriteBatch.Draw(texture, hitbox, Color.DarkBlue);
+                    spriteBatch.Draw(texture, hitbox, Color.Gray);
                     DrawFont(spriteBatch); 
                     break;
             }
@@ -114,7 +114,7 @@ namespace StarWars
         {
             //If the button has text, draw it in the middle of the button
             if (text != null)
-                spriteBatch.DrawString(font, text, new Vector2(Hitbox.X + (Hitbox.Width / 2) - (font.MeasureString(text).X / 2), Hitbox.Y + (Hitbox.Height / 2) - (font.MeasureString(text).Y / 2)), Color.White);
+                spriteBatch.DrawString(font, text, new Vector2(Hitbox.X + (Hitbox.Width / 2) - (font.MeasureString(text).X / 2), Hitbox.Y + (Hitbox.Height / 2) - (font.MeasureString(text).Y / 2)), new Color(210, 210, 210));
         }
     }
 }

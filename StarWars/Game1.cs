@@ -121,13 +121,13 @@ namespace StarWars
             bigFont = Content.Load<SpriteFont>("bigfont");
 
             //Start button on main menu scene
-            startButton = new Button(buttonImg, 400, 200, new Vector2((windowWidth / 2) - 200, (windowHeight / 2) - 100), "PLAY", bigFont);
+            startButton = new Button(buttonImg, 400, 200, new Vector2((windowWidth / 2) - 200, (windowHeight / 2) - 100), "play", bigFont);
             //Exit button on main menu scene
-            exitButton = new Button(buttonImg, 200, 100, new Vector2(10, 10), "EXIT", bigFont);
+            exitButton = new Button(buttonImg, 200, 100, new Vector2(10, 10), "exit", bigFont);
             //Resume button on pause scene
-            resumeButton = new Button(buttonImg, 400, 200, new Vector2((windowWidth / 2) - 200, (windowHeight / 2) - 200), "RESUME", bigFont);
+            resumeButton = new Button(buttonImg, 400, 200, new Vector2((windowWidth / 2) - 200, (windowHeight / 2) - 200), "resume", bigFont);
             //Main Menu button for going to the main menu
-            mainMenuButton = new Button(buttonImg, 400, 200, new Vector2((windowWidth / 2) - 200, (windowHeight / 2)), "MAIN MENU", bigFont);
+            mainMenuButton = new Button(buttonImg, 400, 200, new Vector2((windowWidth / 2) - 200, (windowHeight / 2)), "main menu", bigFont);
         }
 
         /// <summary>
@@ -172,10 +172,20 @@ namespace StarWars
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         private void UpdateMainMenu()
         {
+            //Update the enemies
+            enemyHandler.Update();
+
+            //Update the button, if it's clicked start the game
             startButton.Update();
             if (startButton.State == State.Clicked)
-                gameState = GameState.Game;
+            {
+                //Reset the game before starting
+                GameReset();
 
+                gameState = GameState.Game;
+            }
+
+            //Update the button, if it's clicked close the game
             exitButton.Update();
             if (exitButton.State == State.Clicked)
                 Exit();
@@ -218,20 +228,15 @@ namespace StarWars
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         private void UpdatePauseMenu()
         {
+            //Update the button, if it's clicked continue with the game
             resumeButton.Update();
             if (resumeButton.State == State.Clicked)
                 gameState = GameState.Game;
 
-            exitButton.Update();
-            if (exitButton.State == State.Clicked)
-                Exit();
-
+            //Update the button, if it's clicked open the main menu
             mainMenuButton.Update();
             if (mainMenuButton.State == State.Clicked)
-            {
-                GameReset();
                 gameState = GameState.MainMenu;
-            }
         }
 
         /// <summary>
@@ -240,16 +245,15 @@ namespace StarWars
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         private void UpdateGameOver()
         {
+            //Update the button, if it's clicked close the game
             exitButton.Update();
             if (exitButton.State == State.Clicked)
                 Exit();
 
+            //Update the button, if it's clicked open the main menu
             mainMenuButton.Update();
             if (mainMenuButton.State == State.Clicked)
-            {
-                GameReset();
                 gameState = GameState.MainMenu;
-            }
         }
 
         /// <summary>
@@ -291,6 +295,10 @@ namespace StarWars
         /// </summary>
         private void DrawMainMenu()
         {
+            //Draw the enemies
+            enemyHandler.Draw(spriteBatch);
+            
+            //Draw the gamelogo in the middle of the screen
             spriteBatch.Draw(gameLogoImg, new Rectangle((windowWidth/2) - 300, 100, 600, 271), Color.White);
 
             //Draw the start button
@@ -346,9 +354,6 @@ namespace StarWars
 
             //Draw the main menu button
             mainMenuButton.Draw(spriteBatch);
-
-            //Draw the exit button
-            exitButton.Draw(spriteBatch);
         }
 
         /// <summary>
