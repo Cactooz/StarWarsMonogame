@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System.Threading;
 
 namespace StarWars
 {
@@ -33,7 +32,7 @@ namespace StarWars
         private int totalPoints = 0;
 
         //Textures for the gameObjects
-        private Texture2D xwingImg, xwingFullImg, tieFighterImg, devastatorImg, laser, backgroundImg, tieBomberImg, tieInterceptorImg, tieAdvancedImg, expolsionImg1, expolsionImg2, powerupWingsImg, powerupLivesImg, buttonImg;
+        private Texture2D xwingImg, xwingFullImg, tieFighterImg, devastatorImg, laser, backgroundImg, tieBomberImg, tieInterceptorImg, tieAdvancedImg, expolsionImg1, expolsionImg2, powerupWingsImg, powerupLivesImg, buttonImg, gameLogoImg;
 
         //Font for the game
         private SpriteFont scoreFont, bigFont;
@@ -104,6 +103,7 @@ namespace StarWars
             powerupWingsImg = Content.Load<Texture2D>("powerup4wing");
             powerupLivesImg = Content.Load<Texture2D>("powerupHeart");
             buttonImg = Content.Load<Texture2D>("button");
+            gameLogoImg = Content.Load<Texture2D>("gamelogo");
 
             //Creates the player
             player = new Player(xwingImg, xwingFullImg, (xwingImg.Width / 5), (xwingImg.Height / 5), 10f, 3, laser);
@@ -291,6 +291,8 @@ namespace StarWars
         /// </summary>
         private void DrawMainMenu()
         {
+            spriteBatch.Draw(gameLogoImg, new Rectangle((windowWidth/2) - 300, 100, 600, 271), Color.White);
+
             //Draw the start button
             startButton.Draw(spriteBatch);
 
