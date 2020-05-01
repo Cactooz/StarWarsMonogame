@@ -61,6 +61,15 @@ namespace StarWars
         }
 
         /// <summary>
+        /// Reseting the <c>laserHandler</c>, so the game can be played again
+        /// </summary>
+        public void Reset()
+        {
+            //Empty the lasers list containing all lasers
+            lasers.Clear();
+        }
+
+        /// <summary>
         /// Spawns lasers relative to the xwings position of its guns
         /// </summary>
         public void Spawn()

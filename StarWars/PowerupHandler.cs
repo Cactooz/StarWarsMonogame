@@ -62,6 +62,18 @@ namespace StarWars
         }
 
         /// <summary>
+        /// Reseting the <c>powerupHandler</c>, so the game can be played again
+        /// </summary>
+        public void Reset()
+        {
+            //Restart the spawntimer
+            spawnTimer.Restart();
+
+            //Empty the powerups list containing all powerups
+            powerups.Clear();
+        }
+
+        /// <summary>
         /// Spawning powerups
         /// </summary>
         private void Spawn()

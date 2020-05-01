@@ -49,10 +49,6 @@ namespace StarWars
             this.bomberTexture = bomberTexture;
             this.interceptorTexture = interceptorTexture;
             this.advancedTexture = advancedTexture;
-
-            //Start stopwatches
-            devastatorTimer.Start();
-            advancedTimer.Start();
         }
 
         /// <summary>
@@ -85,6 +81,22 @@ namespace StarWars
             //Draw the lasers
             foreach (Enemy enemy in enemies)
                 enemy.Draw(spriteBatch);
+        }
+
+        /// <summary>
+        /// Reseting the <c>enemyHandler</c>, so the game can be played again
+        /// </summary>
+        public void Reset()
+        {
+            gameOver = false;
+
+            //Restart all spawning timers
+            devastatorTimer.Restart();
+            advancedTimer.Restart();
+            elapsedTimer.Restart();
+
+            //Empty the enemies list containing all enemies
+            enemies.Clear();
         }
 
         /// <summary>

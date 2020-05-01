@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Threading;
 
 namespace StarWars
 {
@@ -19,7 +20,7 @@ namespace StarWars
         private PowerupHandler powerupHandler;
 
         //Button objects
-        private Button startButton, exitButton, resumeButton;
+        private Button startButton, exitButton, resumeButton, mainMenuButton;
 
         //Enumerations objects for the state of the game
         private GameState gameState;
@@ -36,9 +37,6 @@ namespace StarWars
 
         //Font for the game
         private SpriteFont scoreFont, bigFont;
-
-        //Get the current state of the mouse
-        private MouseState mouseState;
 
         public Game1()
         {
@@ -127,8 +125,9 @@ namespace StarWars
             //Exit button on main menu scene
             exitButton = new Button(buttonImg, 200, 100, new Vector2(10, 10), "EXIT", bigFont);
             //Resume button on pause scene
-            resumeButton = new Button(buttonImg, 400, 200, new Vector2((windowWidth / 2) - 200, (windowHeight / 2) - 100), "RESUME", bigFont);
-
+            resumeButton = new Button(buttonImg, 400, 200, new Vector2((windowWidth / 2) - 200, (windowHeight / 2) - 200), "RESUME", bigFont);
+            //Main Menu button for going to the main menu
+            mainMenuButton = new Button(buttonImg, 400, 200, new Vector2((windowWidth / 2) - 200, (windowHeight / 2)), "MAIN MENU", bigFont);
         }
 
         /// <summary>
@@ -147,19 +146,20 @@ namespace StarWars
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            //Switch wich version should be updated depending on the gameState
             switch (gameState)
             {
                 case GameState.MainMenu:
-                    UpdateMainMenu(gameTime);
+                    UpdateMainMenu();
                     break;
                 case GameState.Game:
-                    UpdateGame(gameTime);
+                    UpdateGame();
                     break;
                 case GameState.Pause:
-                    UpdatePauseMenu(gameTime);
+                    UpdatePauseMenu();
                     break;
                 case GameState.GameOver:
-                    UpdateGameOver(gameTime);
+                    UpdateGameOver();
                     break;
             }
 
@@ -170,17 +170,13 @@ namespace StarWars
         /// This is called when the main menu should update itself.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        private void UpdateMainMenu(GameTime gameTime)
+        private void UpdateMainMenu()
         {
-            //Get current mousestate
-            mouseState = Mouse.GetState();
-
-            startButton.Update(mouseState);
-
+            startButton.Update();
             if (startButton.State == State.Clicked)
                 gameState = GameState.Game;
 
-            exitButton.Update(mouseState);
+            exitButton.Update();
             if (exitButton.State == State.Clicked)
                 Exit();
         }
@@ -189,7 +185,7 @@ namespace StarWars
         /// This is called when the game should update itself.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        private void UpdateGame(GameTime gameTime)
+        private void UpdateGame()
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape) || Keyboard.GetState().IsKeyDown(Keys.P))
                 gameState = GameState.Pause;
@@ -220,32 +216,40 @@ namespace StarWars
         /// This is called when the pause menu should update itself.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        private void UpdatePauseMenu(GameTime gameTime)
+        private void UpdatePauseMenu()
         {
-            //Get current mousestate
-            mouseState = Mouse.GetState();
-
-            resumeButton.Update(mouseState);
+            resumeButton.Update();
             if (resumeButton.State == State.Clicked)
                 gameState = GameState.Game;
 
-            exitButton.Update(mouseState);
+            exitButton.Update();
             if (exitButton.State == State.Clicked)
                 Exit();
+
+            mainMenuButton.Update();
+            if (mainMenuButton.State == State.Clicked)
+            {
+                GameReset();
+                gameState = GameState.MainMenu;
+            }
         }
 
         /// <summary>
         /// This is called when the game over menu should update itself.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        private void UpdateGameOver(GameTime gameTime)
+        private void UpdateGameOver()
         {
-            //Get current mousestate
-            mouseState = Mouse.GetState();
-
-            exitButton.Update(mouseState);
+            exitButton.Update();
             if (exitButton.State == State.Clicked)
                 Exit();
+
+            mainMenuButton.Update();
+            if (mainMenuButton.State == State.Clicked)
+            {
+                GameReset();
+                gameState = GameState.MainMenu;
+            }
         }
 
         /// <summary>
@@ -254,64 +258,51 @@ namespace StarWars
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+            //Start of drawing all gameObjects on the screen
+            spriteBatch.Begin();
+
+            GraphicsDevice.Clear(Color.Black);
+            //Draw the background stars
+            background.Draw(spriteBatch);
+
             //Switch wich version should be drawn depending on the gameState
             switch (gameState)
             {
                 case GameState.MainMenu:
-                    DrawMainMenu(gameTime);
+                    DrawMainMenu();
                     break;
                 case GameState.Game:
-                    DrawGame(gameTime);
+                    DrawGame();
                     break;
                 case GameState.Pause:
-                    DrawPauseMenu(gameTime);
+                    DrawPauseMenu();
                     break;
                 case GameState.GameOver:
-                    DrawGameOver(gameTime);
+                    DrawGameOver();
                     break;
             }
 
+            spriteBatch.End();
             base.Draw(gameTime);
         }
 
         /// <summary>
         /// This is called when the main menu should draw itself.
         /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        private void DrawMainMenu(GameTime gameTime)
+        private void DrawMainMenu()
         {
-            GraphicsDevice.Clear(Color.Black);
-
-            //Start of drawing all gameObjects on the screen
-            spriteBatch.Begin();
-
-            //Draw the background stars
-            background.Draw(spriteBatch);
-
             //Draw the start button
             startButton.Draw(spriteBatch);
 
             //Draw the exit button
             exitButton.Draw(spriteBatch);
-
-            spriteBatch.End();
-            
         }
 
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        private void DrawGame(GameTime gameTime)
+        private void DrawGame()
         {
-            GraphicsDevice.Clear(Color.Black);
-
-            //Start of drawing all gameObjects on the screen
-            spriteBatch.Begin();
-
-            //Draw the background stars
-            background.Draw(spriteBatch);
-
             //Draws the powerups
             powerupHandler.Draw(spriteBatch);
 
@@ -326,24 +317,13 @@ namespace StarWars
 
             //Draw the score
             spriteBatch.DrawString(scoreFont, $"Score: {totalPoints}", new Vector2(10, 75), Color.White);
-
-            spriteBatch.End();
         }
 
         /// <summary>
         /// This is called when the pause menu should draw itself.
         /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        private void DrawPauseMenu(GameTime gameTime)
+        private void DrawPauseMenu()
         {
-            GraphicsDevice.Clear(Color.Black);
-
-            //Start of drawing all gameObjects on the screen
-            spriteBatch.Begin();
-
-            //Draw the background stars
-            background.Draw(spriteBatch);
-
             //Draws the powerups
             powerupHandler.Draw(spriteBatch);
 
@@ -362,32 +342,40 @@ namespace StarWars
             //Draw the start button
             resumeButton.Draw(spriteBatch);
 
+            //Draw the main menu button
+            mainMenuButton.Draw(spriteBatch);
+
             //Draw the exit button
             exitButton.Draw(spriteBatch);
-
-            spriteBatch.End();
         }
 
         /// <summary>
         /// This is called when the game over menu should draw itself.
         /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        private void DrawGameOver(GameTime gameTime)
+        private void DrawGameOver()
         {
-            GraphicsDevice.Clear(Color.Black);
-
-            //Start of drawing all gameObjects on the screen
-            spriteBatch.Begin();
-
-            //Draw the background stars
-            background.Draw(spriteBatch);
-
             //Draw the exit button
             exitButton.Draw(spriteBatch);
 
-            spriteBatch.DrawString(bigFont, $"Score: {totalPoints}", new Vector2((windowWidth / 2) - (bigFont.MeasureString($"Score: {totalPoints}").X / 2), (windowHeight / 2) - (bigFont.MeasureString($"Score: {totalPoints}").Y / 2)), Color.White);
+            //Draw the main menu button
+            mainMenuButton.Draw(spriteBatch);
 
-            spriteBatch.End();
+            //Draw the score big
+            spriteBatch.DrawString(bigFont, $"Score: {totalPoints}", new Vector2((windowWidth / 2) - (bigFont.MeasureString($"Score: {totalPoints}").X / 2), (windowHeight / 2) - (bigFont.MeasureString($"Score: {totalPoints}").Y / 2) - 100), Color.White);
+        }
+
+        /// <summary>
+        /// Reseting the game so it can be played again
+        /// </summary>
+        private void GameReset()
+        {
+            enemyHandler.Reset();
+            player.Reset();
+            powerupHandler.Reset();
+            explosionHandler.Reset();
+
+            //Set the score back to 0
+            totalPoints = 0;
         }
 
         /// <summary>

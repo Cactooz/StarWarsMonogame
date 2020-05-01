@@ -13,6 +13,10 @@ namespace StarWars
         //The current state of the button
         private State state;
 
+        //Current and old state of the mouse
+        private MouseState mNewState;
+        private MouseState mOldState;
+
         //Text for the button, null by default
         private string text = null;
 
@@ -58,17 +62,26 @@ namespace StarWars
         /// Update the buttom. Does the mouse hover over the button and is it left clicked.
         /// </summary>
         /// <param name="mouseState">The current state of the mouse</param>
-        public void Update(MouseState mouseState)
+        public override void Update()
         {
-            if (hitbox.Contains(mouseState.X, mouseState.Y))
+            //Get current mousestate
+            mNewState = Mouse.GetState();
+
+            //Check if the mouse is inside of the button hitbox
+            if (hitbox.Contains(mNewState.X, mNewState.Y))
             {
-                if (mouseState.LeftButton == ButtonState.Pressed)
+                //If the button is clicked change its state
+                //Holding the button won't do anything
+                if (mNewState.LeftButton == ButtonState.Pressed && mOldState.LeftButton != ButtonState.Pressed)
                     state = State.Clicked;
                 else
                     state = State.Hover;
             }
             else
                 state = State.Normal;
+
+            //Save the current mouse state as the old one
+            mOldState = mNewState;
         }
 
         /// <summary>

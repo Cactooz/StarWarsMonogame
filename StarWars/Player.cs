@@ -112,6 +112,19 @@ namespace StarWars
         }
 
         /// <summary>
+        /// Reseting the <c>player</c>, so the game can be played again
+        /// </summary>
+        public void Reset()
+        {
+            powerupState = 0;
+            hitpoints = 3;
+            alive = true;
+            Position = new Vector2((Game1.WindowWidth / 2) - (Hitbox.Width / 2), Game1.WindowHeight - Hitbox.Height - (Game1.WindowHeight * 0.05f));
+
+            laserHandler.Reset();
+        }
+
+        /// <summary>
         /// Moves the player right and left with the movement speed of <c>speed</c>
         /// when A and D or Left and Right keys are pressed
         /// </summary>

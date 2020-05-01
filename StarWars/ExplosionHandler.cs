@@ -52,6 +52,15 @@ namespace StarWars
         }
 
         /// <summary>
+        /// Reseting the <c>explosionHandler</c>, so the game can be played again
+        /// </summary>
+        public void Reset()
+        {
+            //Empty the explosions list containing all explosions
+            explosions.Clear();
+        }
+
+        /// <summary>
         /// Adds a explosion, randomizing between teo textures
         /// </summary>
         /// <param name="position">The position of the explosion</param>
