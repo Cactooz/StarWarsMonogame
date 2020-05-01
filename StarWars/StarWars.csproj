@@ -62,6 +62,7 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Button.cs" />
     <Compile Include="DataStorageHandler.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="EnemyHandler.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="ExplosionHandler.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="GameObject.cs" />
+    <Compile Include="GameState.cs" />
     <Compile Include="Laser.cs" />
     <Compile Include="LaserHandler.cs" />
     <Compile Include="Player.cs" />

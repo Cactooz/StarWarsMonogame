@@ -156,7 +156,6 @@ namespace StarWars
             //Change player alive state to false if it has less than 1 hitpoints
             if (hitpoints <= 0)
                 alive = false;
-            //TODO: Make a game over scene when the player is no longer alive
         }
 
         /// <summary>

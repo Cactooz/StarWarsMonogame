@@ -13,6 +13,25 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin bigfont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:bigfont.spritefont
+
+#begin button.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:button.png
+
 #begin devastator.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -61,13 +80,6 @@
 /processorParam:TextureFormat=Color
 /build:laser.png
 
-#begin mainfont.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:mainfont.spritefont
-
 #begin powerup4wing.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -91,6 +103,13 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:powerupHeart.png
+
+#begin scorefont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:scorefont.spritefont
 
 #begin stars.png
 /importer:TextureImporter

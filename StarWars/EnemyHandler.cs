@@ -14,6 +14,9 @@ namespace StarWars
         private Stopwatch advancedTimer = Stopwatch.StartNew();
         private Stopwatch elapsedTimer = Stopwatch.StartNew();
 
+        //Bool changes to true when a mustdie enemy goes outside of the screen
+        private bool gameOver = false;
+
         //List containing all enemies
         private List<Enemy> enemies = new List<Enemy>();
 
@@ -23,6 +26,12 @@ namespace StarWars
         /// List containing all enemies
         /// </summary>
         public List<Enemy> Enemies { get => enemies; set => enemies = value; }
+
+        /// <summary>
+        /// Bool changes to true when a mustdie enemy goes outside of the screen
+        /// and the game should be ended
+        /// </summary>
+        public bool GameOver { get => gameOver; }
 
         /// <summary>
         /// Constructor for <c>EnemyHandler</c>
@@ -176,12 +185,12 @@ namespace StarWars
             //Set the enemy alive state to false if the enemy is outside of the screen
             foreach (Enemy enemy in enemies)
             {
-                if (enemy.Hitbox.Y >= Game1.WindowHeight + 10 + enemy.Hitbox.Y && !enemy.MustDie)
+                if (enemy.Position.Y >= Game1.WindowHeight + 10 + enemy.Hitbox.Height && !enemy.MustDie)
                     enemy.Alive = false;
-                else if (enemy.Hitbox.Y >= Game1.WindowHeight + 10 + enemy.Hitbox.Y && enemy.MustDie)
+                else if (enemy.Position.Y >= Game1.WindowHeight + 10 + enemy.Hitbox.Height && enemy.MustDie)
                 {
-                    //TODO: add game over scene when a mush die enemy goes outside of the screen
                     enemy.Alive = false;
+                    gameOver = true;
                 }
             }
         }

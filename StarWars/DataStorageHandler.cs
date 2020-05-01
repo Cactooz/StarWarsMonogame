@@ -9,33 +9,32 @@ namespace StarWars
     class DataStorageHandler
     {
         private string filePath;
+        string[,] highscores = new string[,] {
+                {"Leader", "1000"},
+                {"Test", "100"}
+            };
 
         public DataStorageHandler(string fileName)
         {
             filePath = Path.Combine(Environment.CurrentDirectory, fileName);
         }
 
-        public void Update()
+        public void GetData()
         {
 
         }
 
-        private void LoadData()
+        public void SaveData()
         {
 
         }
 
-        private void SaveData()
+        public void RemoveData()
         {
 
         }
 
-        private void RemoveData()
-        {
-
-        }
-
-        private void WriteData()
+        public void WriteData()
         {
 
         }
