@@ -4,14 +4,10 @@ using Microsoft.Xna.Framework.Input;
 
 namespace StarWars
 {
-    /// <summary>
-    /// Button states, Normal, Clicked & Hover
-    /// </summary>
-    public enum State { Normal, Clicked, Hover }
     class Button:GameObject
     {
         //The current state of the button
-        private State state;
+        private ClickableButtonState state;
 
         //Current and old state of the mouse
         private MouseState mNewState;
@@ -26,7 +22,7 @@ namespace StarWars
         /// <summary>
         /// Get the current state of the button
         /// </summary>
-        public State State { get => state; }
+        public ClickableButtonState State { get => state; }
 
         /// <summary>
         /// Constructor for Button without text
@@ -72,12 +68,12 @@ namespace StarWars
                 //If the button is clicked change its state
                 //Holding the button won't do anything
                 if (mNewState.LeftButton == ButtonState.Pressed && mOldState.LeftButton != ButtonState.Pressed)
-                    state = State.Clicked;
+                    state = ClickableButtonState.Clicked;
                 else
-                    state = State.Hover;
+                    state = ClickableButtonState.Hover;
             }
             else
-                state = State.Normal;
+                state = ClickableButtonState.Normal;
 
             //Save the current mouse state as the old one
             mOldState = mNewState;
@@ -91,15 +87,15 @@ namespace StarWars
             spriteBatch.Draw(texture, hitbox, Color.White);
             switch (state)
             {
-                case State.Normal:
+                case ClickableButtonState.Normal:
                     spriteBatch.Draw(texture, hitbox, Color.White);
                     DrawFont(spriteBatch);
                     break;
-                case State.Hover:
+                case ClickableButtonState.Hover:
                     spriteBatch.Draw(texture, hitbox, Color.LightGray);
                     DrawFont(spriteBatch); 
                     break;
-                case State.Clicked:
+                case ClickableButtonState.Clicked:
                     spriteBatch.Draw(texture, hitbox, Color.Gray);
                     DrawFont(spriteBatch); 
                     break;

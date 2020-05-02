@@ -5,11 +5,21 @@ namespace StarWars
 {
     class Cursor:GameObject
     {
-        //The current mouse state
-        private MouseState mouseState;
+        //The current state of the cursor
+        private CursorState cursorState;
+
+        //Current and old state of the mouse
+        private MouseState mNewState;
+        private MouseState mOldState;
 
         //Textures for the cursor
         private Texture2D textureNormal, textureClick;
+
+        /// <summary>
+        /// Get the current <c>cursorState</c>
+        /// Normal or Click
+        /// </summary>
+        public CursorState CursorState { get => cursorState; }
 
         /// <summary>
         /// Constructor for Cursor
@@ -30,12 +40,17 @@ namespace StarWars
         public override void Update()
         {
             //Get current mousestate
-            mouseState = Mouse.GetState();
+            mNewState = Mouse.GetState();
 
-            hitbox.X = mouseState.X;
-            hitbox.Y = mouseState.Y;
+            hitbox.X = mNewState.X;
+            hitbox.Y = mNewState.Y;
 
             Click();
+
+            ChangeState();
+
+            //Save the current mouse state as the old one
+            mOldState = mNewState;
         }
 
         /// <summary>
@@ -44,10 +59,22 @@ namespace StarWars
         /// </summary>
         private void Click()
         {
-            if (mouseState.LeftButton == ButtonState.Pressed)
+            if (mNewState.LeftButton == ButtonState.Pressed)
                 texture = textureClick;
             else
                 texture = textureNormal;
+        }
+
+        /// <summary>
+        /// Change the <c>cursorState</c> to click if the left mouse button is clicked
+        /// and otherwise keep it as normal. Note: this does not affect the Draw texture
+        /// </summary>
+        private void ChangeState()
+        {
+            if (mNewState.LeftButton == ButtonState.Pressed && mOldState.LeftButton != ButtonState.Pressed)
+                cursorState = CursorState.Click;
+            else
+                cursorState = CursorState.Normal;
         }
     }
 }

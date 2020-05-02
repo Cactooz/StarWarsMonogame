@@ -184,9 +184,11 @@ namespace StarWars
             //Update the enemies
             enemyHandler.Update();
 
+            CursorCollisions();
+
             //Update the button, if it's clicked start the game
             startButton.Update();
-            if (startButton.State == State.Clicked)
+            if (startButton.State == ClickableButtonState.Clicked)
             {
                 //Reset the game before starting
                 GameReset();
@@ -196,7 +198,7 @@ namespace StarWars
 
             //Update the button, if it's clicked close the game
             exitButton.Update();
-            if (exitButton.State == State.Clicked)
+            if (exitButton.State == ClickableButtonState.Clicked)
                 Exit();
         }
 
@@ -242,12 +244,12 @@ namespace StarWars
 
             //Update the button, if it's clicked continue with the game
             resumeButton.Update();
-            if (resumeButton.State == State.Clicked)
+            if (resumeButton.State == ClickableButtonState.Clicked)
                 gameState = GameState.Game;
 
             //Update the button, if it's clicked open the main menu
             mainMenuButton.Update();
-            if (mainMenuButton.State == State.Clicked)
+            if (mainMenuButton.State == ClickableButtonState.Clicked)
                 gameState = GameState.MainMenu;
         }
 
@@ -262,7 +264,7 @@ namespace StarWars
 
             //Update the button, if it's clicked open the main menu
             mainMenuButton.Update();
-            if (mainMenuButton.State == State.Clicked)
+            if (mainMenuButton.State == ClickableButtonState.Clicked)
                 gameState = GameState.MainMenu;
         }
 
@@ -456,6 +458,22 @@ namespace StarWars
                     //Add points when a powerup is picked up
                     AddPoints(25);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Check if the cursor is collisioning with any enemy
+        /// and the cursor is clicked, if so remove the enemy
+        /// </summary>
+        private void CursorCollisions()
+        {
+            //Loop through all enemies
+            foreach (Enemy enemy in enemyHandler.Enemies)
+            {
+                //Check if the enemy and cursor intersects and the left mouse button is clicked
+                if (cursor.Hitbox.Intersects(enemy.Hitbox) && cursor.CursorState == CursorState.Click)
+                    //Kill and remove the enemy
+                    enemy.Alive = false;
             }
         }
 
