@@ -17,6 +17,7 @@ namespace StarWars
         private GameObject background;
         private ExplosionHandler explosionHandler;
         private PowerupHandler powerupHandler;
+        private Cursor cursor;
 
         //Button objects
         private Button startButton, exitButton, resumeButton, mainMenuButton;
@@ -32,7 +33,7 @@ namespace StarWars
         private int totalPoints = 0;
 
         //Textures for the gameObjects
-        private Texture2D xwingImg, xwingFullImg, tieFighterImg, devastatorImg, laser, backgroundImg, tieBomberImg, tieInterceptorImg, tieAdvancedImg, expolsionImg1, expolsionImg2, powerupWingsImg, powerupLivesImg, buttonImg, gameLogoImg;
+        private Texture2D xwingImg, xwingFullImg, tieFighterImg, devastatorImg, laser, backgroundImg, tieBomberImg, tieInterceptorImg, tieAdvancedImg, expolsionImg1, expolsionImg2, powerupWingsImg, powerupLivesImg, buttonImg, gameLogoImg, cursorImg, cursorClickImg;
 
         //Font for the game
         private SpriteFont scoreFont, bigFont;
@@ -67,8 +68,8 @@ namespace StarWars
         /// </summary>
         protected override void Initialize()
         {
-            //Make the cursor visible
-            IsMouseVisible = true;
+            //Cursor visibility
+            IsMouseVisible = false;
 
             //Fullscreen
             graphics.IsFullScreen = false;
@@ -104,6 +105,8 @@ namespace StarWars
             powerupLivesImg = Content.Load<Texture2D>("powerupHeart");
             buttonImg = Content.Load<Texture2D>("button");
             gameLogoImg = Content.Load<Texture2D>("gamelogo");
+            cursorImg = Content.Load<Texture2D>("cursor");
+            cursorClickImg = Content.Load<Texture2D>("cursorclick");
 
             //Creates the player
             player = new Player(xwingImg, xwingFullImg, (xwingImg.Width / 5), (xwingImg.Height / 5), 10f, 3, laser);
@@ -115,6 +118,9 @@ namespace StarWars
             explosionHandler = new ExplosionHandler(expolsionImg1, expolsionImg2, 8, 8);
             //Creates powerupHandler with powerup images
             powerupHandler = new PowerupHandler(powerupWingsImg, powerupLivesImg);
+
+            //Creates the cursor that follows the cursor
+            cursor = new Cursor(cursorImg, cursorClickImg, 50, 50);
 
             //Load in fonts
             scoreFont = Content.Load<SpriteFont>("scorefont");
@@ -172,6 +178,9 @@ namespace StarWars
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         private void UpdateMainMenu()
         {
+            //Update the cursor
+            cursor.Update();
+
             //Update the enemies
             enemyHandler.Update();
 
@@ -228,6 +237,9 @@ namespace StarWars
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         private void UpdatePauseMenu()
         {
+            //Update the cursor
+            cursor.Update();
+
             //Update the button, if it's clicked continue with the game
             resumeButton.Update();
             if (resumeButton.State == State.Clicked)
@@ -245,10 +257,8 @@ namespace StarWars
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         private void UpdateGameOver()
         {
-            //Update the button, if it's clicked close the game
-            exitButton.Update();
-            if (exitButton.State == State.Clicked)
-                Exit();
+            //Update the cursor
+            cursor.Update();
 
             //Update the button, if it's clicked open the main menu
             mainMenuButton.Update();
@@ -306,6 +316,9 @@ namespace StarWars
 
             //Draw the exit button
             exitButton.Draw(spriteBatch);
+
+            //Draw the cursor (Keep last so it's above everything)
+            cursor.Draw(spriteBatch);
         }
 
         /// <summary>
@@ -354,6 +367,9 @@ namespace StarWars
 
             //Draw the main menu button
             mainMenuButton.Draw(spriteBatch);
+
+            //Draw the cursor (Keep last so it's above everything)
+            cursor.Draw(spriteBatch);
         }
 
         /// <summary>
@@ -361,14 +377,14 @@ namespace StarWars
         /// </summary>
         private void DrawGameOver()
         {
-            //Draw the exit button
-            exitButton.Draw(spriteBatch);
-
             //Draw the main menu button
             mainMenuButton.Draw(spriteBatch);
 
             //Draw the score big
             spriteBatch.DrawString(bigFont, $"Score: {totalPoints}", new Vector2((windowWidth / 2) - (bigFont.MeasureString($"Score: {totalPoints}").X / 2), (windowHeight / 2) - (bigFont.MeasureString($"Score: {totalPoints}").Y / 2) - 100), Color.White);
+
+            //Draw the cursor (Keep last so it's above everything)
+            cursor.Draw(spriteBatch);
         }
 
         /// <summary>

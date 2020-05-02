@@ -63,6 +63,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Button.cs" />
+    <Compile Include="Cursor.cs" />
     <Compile Include="DataStorageHandler.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="EnemyHandler.cs" />

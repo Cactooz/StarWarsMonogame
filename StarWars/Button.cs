@@ -61,7 +61,6 @@ namespace StarWars
         /// <summary>
         /// Update the buttom. Does the mouse hover over the button and is it left clicked.
         /// </summary>
-        /// <param name="mouseState">The current state of the mouse</param>
         public override void Update()
         {
             //Get current mousestate
