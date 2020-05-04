@@ -33,7 +33,7 @@ namespace StarWars
         private int totalPoints = 0;
 
         //Textures for the gameObjects
-        private Texture2D xwingImg, xwingFullImg, tieFighterImg, devastatorImg, laser, backgroundImg, tieBomberImg, tieInterceptorImg, tieAdvancedImg, expolsionImg1, expolsionImg2, powerupWingsImg, powerupLivesImg, buttonImg, gameLogoImg, cursorImg, cursorClickImg;
+        private Texture2D xwingImg, xwingFullImg, tieFighterImg, devastatorImg, laser, backgroundImg, tieBomberImg, tieInterceptorImg, lambdaImg, expolsionImg1, expolsionImg2, powerupWingsImg, powerupLivesImg, buttonImg, gameLogoImg, cursorImg, cursorClickImg;
 
         //Font for the game
         private SpriteFont scoreFont, bigFont;
@@ -97,7 +97,7 @@ namespace StarWars
             tieBomberImg = Content.Load<Texture2D>("tiebomber");
             tieInterceptorImg = Content.Load<Texture2D>("tieinterceptor");
             devastatorImg = Content.Load<Texture2D>("devastator");
-            tieAdvancedImg = Content.Load<Texture2D>("tieadvanced");
+            lambdaImg = Content.Load<Texture2D>("lambdat4a");
             laser = Content.Load<Texture2D>("laser");
             expolsionImg1 = Content.Load<Texture2D>("explosion1");
             expolsionImg2 = Content.Load<Texture2D>("explosion2");
@@ -111,7 +111,7 @@ namespace StarWars
             //Creates the player
             player = new Player(xwingImg, xwingFullImg, (xwingImg.Width / 5), (xwingImg.Height / 5), 10f, 3, laser);
             //Creates enemyManager object and sending in all enemy textures
-            enemyManager = new EnemyManager(tieFighterImg, devastatorImg, tieBomberImg, tieInterceptorImg, tieAdvancedImg);
+            enemyManager = new EnemyManager(tieFighterImg, devastatorImg, tieBomberImg, tieInterceptorImg, lambdaImg);
             //Background image that sizes to fit window size
             background = new GameObject(backgroundImg, windowWidth, windowHeight);
             //Creates explosionManager and sending in image, column and rows

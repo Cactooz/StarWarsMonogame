@@ -11,7 +11,7 @@ namespace StarWars
 
         //Add a stopwatch timer that will keep track of time
         private Stopwatch devastatorTimer = Stopwatch.StartNew();
-        private Stopwatch advancedTimer = Stopwatch.StartNew();
+        private Stopwatch lambdaTimer = Stopwatch.StartNew();
         private Stopwatch elapsedTimer = Stopwatch.StartNew();
 
         //Bool changes to true when a mustdie enemy goes outside of the screen
@@ -20,7 +20,7 @@ namespace StarWars
         //List containing all enemies
         private List<Enemy> enemies = new List<Enemy>();
 
-        private Texture2D tieFighterTexture, devastatorTexture, bomberTexture, interceptorTexture, advancedTexture;
+        private Texture2D tieFighterTexture, devastatorTexture, bomberTexture, interceptorTexture, lambdaTexture;
 
         /// <summary>
         /// List containing all enemies
@@ -36,19 +36,19 @@ namespace StarWars
         /// <summary>
         /// Constructor for <c>EnemyManager</c>
         /// </summary>
-        /// <param name="tieFighterTexture">Texture for tieFighter</param>
-        /// <param name="devastatorTexture">Texture for devastator</param>
-        /// <param name="bomberTexture">Texture for tieBomber</param>
-        /// <param name="interceptorTexture">Texture for tieInterceptor</param>
-        /// <param name="advancedTexture">Texture for tieAdvanced</param>
-        public EnemyManager(Texture2D tieFighterTexture, Texture2D devastatorTexture, Texture2D bomberTexture, Texture2D interceptorTexture, Texture2D advancedTexture)
+        /// <param name="tieFighterTexture">Texture for Tie Fighter</param>
+        /// <param name="devastatorTexture">Texture for Devastator</param>
+        /// <param name="bomberTexture">Texture for Tie Bomber</param>
+        /// <param name="interceptorTexture">Texture for Tie Interceptor</param>
+        /// <param name="lambdaTexture">Texture for Lambda T4-A</param>
+        public EnemyManager(Texture2D tieFighterTexture, Texture2D devastatorTexture, Texture2D bomberTexture, Texture2D interceptorTexture, Texture2D lambdaTexture)
         {
             //Add the textures for all enemies
             this.tieFighterTexture = tieFighterTexture;
             this.devastatorTexture = devastatorTexture;
             this.bomberTexture = bomberTexture;
             this.interceptorTexture = interceptorTexture;
-            this.advancedTexture = advancedTexture;
+            this.lambdaTexture = lambdaTexture;
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace StarWars
 
             //Restart all spawning timers
             devastatorTimer.Restart();
-            advancedTimer.Restart();
+            lambdaTimer.Restart();
             elapsedTimer.Restart();
 
             //Empty the enemies list containing all enemies
@@ -112,8 +112,8 @@ namespace StarWars
 
             //Spawn boss enemies (that must die)
             //Layout: texture, timer, spawnTime, hitBoxX, hitBoxY, speed, lives
-            SpawnBoss(devastatorTexture, devastatorTimer, 35, 288, 480, 0.5f, 50);
-            SpawnBoss(advancedTexture, advancedTimer, 60, 85, 69, 5f, 5);
+            SpawnBoss(devastatorTexture, devastatorTimer, 35, 350, 600, 0.5f, 75);
+            SpawnBoss(lambdaTexture, lambdaTimer, 45, 150, 146, 4.5f, 10);
         }
 
         /// <summary>
