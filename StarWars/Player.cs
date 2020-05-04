@@ -9,7 +9,7 @@ namespace StarWars
     class Player:Entity
     {
         private Random random = new Random();
-        private LaserHandler laserHandler;
+        private LaserManager laserManager;
 
         //Keyboard states for the player
         private KeyboardState kNewState;
@@ -38,7 +38,7 @@ namespace StarWars
         /// <summary>
         /// The <c>laserHanldler</c> object, managing <c>lasers</c>
         /// </summary>
-        public LaserHandler LaserHandler { get => laserHandler; }
+        public LaserManager LaserManager { get => laserManager; }
 
         /// <summary>
         /// Constructor for <c>Player</c>
@@ -60,8 +60,8 @@ namespace StarWars
             //Set the laser texture / color
             this.laserTexture = laserTexture;
 
-            //Create the laserHandler object
-            laserHandler = new LaserHandler(laserTexture, this);
+            //Create the laserManager object
+            laserManager = new LaserManager(laserTexture, this);
 
             this.hitpoints = hitpoints;
         }
@@ -78,8 +78,8 @@ namespace StarWars
             Move();
             Shoot();
 
-            //Tell the laserHandler to update that lasers
-            laserHandler.Update();
+            //Tell the laserManager to update that lasers
+            laserManager.Update();
 
             //Check if the powerup state has changed, if so execute the right powerup
             PowerupChecker();
@@ -99,8 +99,8 @@ namespace StarWars
         /// </summary>
         public override void Draw(SpriteBatch spriteBatch)
         {
-            //Draw the lasers through the laserHandler
-            laserHandler.Draw(spriteBatch);
+            //Draw the lasers through the laserManager
+            laserManager.Draw(spriteBatch);
 
             //Calls the base Draw method for drawing the xwing if it's alive and don't have 4 wings
             if (alive && !has4wings)
@@ -121,7 +121,7 @@ namespace StarWars
             alive = true;
             Position = new Vector2((Game1.WindowWidth / 2) - (Hitbox.Width / 2), Game1.WindowHeight - Hitbox.Height - (Game1.WindowHeight * 0.05f));
 
-            laserHandler.Reset();
+            laserManager.Reset();
         }
 
         /// <summary>
@@ -150,14 +150,14 @@ namespace StarWars
         }
 
         /// <summary>
-        /// Spawn lasers with <c>laserHandler</c> when space is clicked,
+        /// Spawn lasers with <c>laserManager</c> when space is clicked,
         /// holding the spacebar will only spawn once
         /// </summary>
         private void Shoot()
         {
-            //Spawn a laser (through the kaserHandler) if space is pressed, but not hold
+            //Spawn a laser (through the kaserManager) if space is pressed, but not hold
             if (kNewState.IsKeyDown(Keys.Space) && kOldState.IsKeyUp(Keys.Space))
-                laserHandler.Spawn();
+                laserManager.Spawn();
         }
 
         /// <summary>

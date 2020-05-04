@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace StarWars
 {
-    class PowerupHandler
+    class PowerupManager
     {
         private Random random = new Random();
 
@@ -26,11 +26,11 @@ namespace StarWars
         public List<Powerup> Powerups { get => powerups; }
 
         /// <summary>
-        /// Constructor for PowerupHandler
+        /// Constructor for PowerupManager
         /// </summary>
         /// <param name="texture4wings">Texture for the <c>Powerup</c> where the xwing gets 4 wings</param>
         /// <param name="textureLives">Texture for the <c>Powerup</c> where you get extra lives</param>
-        public PowerupHandler(Texture2D texture4wings, Texture2D textureLives)
+        public PowerupManager(Texture2D texture4wings, Texture2D textureLives)
         {
             this.texture4wings = texture4wings;
             this.textureLives = textureLives;
@@ -62,7 +62,7 @@ namespace StarWars
         }
 
         /// <summary>
-        /// Reseting the <c>powerupHandler</c>, so the game can be played again
+        /// Reseting the <c>powerupManager</c>, so the game can be played again
         /// </summary>
         public void Reset()
         {

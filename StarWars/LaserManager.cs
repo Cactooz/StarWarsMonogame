@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace StarWars
 {
-    class LaserHandler
+    class LaserManager
     {
         private Player player;
 
@@ -22,11 +22,11 @@ namespace StarWars
         public List<Laser> Lasers { get => lasers; set => lasers = value; }
 
         /// <summary>
-        /// Constructor for <c>LaserHandler</c>
+        /// Constructor for <c>LaserManager</c>
         /// </summary>
         /// <param name="texture">Texture of the <c>laser</c></param>
         /// <param name="player"><c>player</c> object</param>
-        public LaserHandler(Texture2D texture, Player player)
+        public LaserManager(Texture2D texture, Player player)
         {
             this.texture = texture;
 
@@ -61,7 +61,7 @@ namespace StarWars
         }
 
         /// <summary>
-        /// Reseting the <c>laserHandler</c>, so the game can be played again
+        /// Reseting the <c>laserManager</c>, so the game can be played again
         /// </summary>
         public void Reset()
         {

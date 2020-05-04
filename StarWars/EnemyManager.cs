@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace StarWars
 {
-    class EnemyHandler
+    class EnemyManager
     {
         private Random random = new Random();
 
@@ -34,14 +34,14 @@ namespace StarWars
         public bool GameOver { get => gameOver; }
 
         /// <summary>
-        /// Constructor for <c>EnemyHandler</c>
+        /// Constructor for <c>EnemyManager</c>
         /// </summary>
         /// <param name="tieFighterTexture">Texture for tieFighter</param>
         /// <param name="devastatorTexture">Texture for devastator</param>
         /// <param name="bomberTexture">Texture for tieBomber</param>
         /// <param name="interceptorTexture">Texture for tieInterceptor</param>
         /// <param name="advancedTexture">Texture for tieAdvanced</param>
-        public EnemyHandler(Texture2D tieFighterTexture, Texture2D devastatorTexture, Texture2D bomberTexture, Texture2D interceptorTexture, Texture2D advancedTexture)
+        public EnemyManager(Texture2D tieFighterTexture, Texture2D devastatorTexture, Texture2D bomberTexture, Texture2D interceptorTexture, Texture2D advancedTexture)
         {
             //Add the textures for all enemies
             this.tieFighterTexture = tieFighterTexture;
@@ -84,7 +84,7 @@ namespace StarWars
         }
 
         /// <summary>
-        /// Reseting the <c>enemyHandler</c>, so the game can be played again
+        /// Reseting the <c>enemyManager</c>, so the game can be played again
         /// </summary>
         public void Reset()
         {

@@ -49,32 +49,32 @@
       <FileName>Explosion.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="StarWars.PowerupHandler" Collapsed="true">
+  <Class Name="StarWars.PowerupManager" Collapsed="true">
     <Position X="8.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAgAAAAEATCAAIAAAQYAAAAWAAAAAAAA=</HashCode>
-      <FileName>PowerupHandler.cs</FileName>
+      <FileName>PowerupManager.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="StarWars.LaserHandler" Collapsed="true">
+  <Class Name="StarWars.LaserManager" Collapsed="true">
     <Position X="6.5" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAgAAAAFADAAAAAAAQwAFAAAABAAAAAA=</HashCode>
-      <FileName>LaserHandler.cs</FileName>
+      <FileName>LaserManager.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="StarWars.EnemyHandler" Collapsed="true">
+  <Class Name="StarWars.EnemyManager" Collapsed="true">
     <Position X="6.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAASIAAQAABgAAABEgAAAAAAEAQAABCAQAAAAAAAI=</HashCode>
-      <FileName>EnemyHandler.cs</FileName>
+      <FileName>EnemyManager.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="StarWars.ExplosionHandler" Collapsed="true">
+  <Class Name="StarWars.ExplosionManager" Collapsed="true">
     <Position X="6.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAoAAAAAAAEgAAAABAAAAAAACAAAAACAQAAAQAAAA=</HashCode>
-      <FileName>ExplosionHandler.cs</FileName>
+      <FileName>ExplosionManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

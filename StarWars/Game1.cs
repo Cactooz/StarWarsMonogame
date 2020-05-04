@@ -13,10 +13,10 @@ namespace StarWars
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
         private Player player;
-        private EnemyHandler enemyHandler;
+        private EnemyManager enemyManager;
         private GameObject background;
-        private ExplosionHandler explosionHandler;
-        private PowerupHandler powerupHandler;
+        private ExplosionManager explosionManager;
+        private PowerupManager powerupManager;
         private Cursor cursor;
 
         //Button objects
@@ -110,14 +110,14 @@ namespace StarWars
 
             //Creates the player
             player = new Player(xwingImg, xwingFullImg, (xwingImg.Width / 5), (xwingImg.Height / 5), 10f, 3, laser);
-            //Creates enemyHandler object and sending in all enemy textures
-            enemyHandler = new EnemyHandler(tieFighterImg, devastatorImg, tieBomberImg, tieInterceptorImg, tieAdvancedImg);
+            //Creates enemyManager object and sending in all enemy textures
+            enemyManager = new EnemyManager(tieFighterImg, devastatorImg, tieBomberImg, tieInterceptorImg, tieAdvancedImg);
             //Background image that sizes to fit window size
             background = new GameObject(backgroundImg, windowWidth, windowHeight);
-            //Creates explosionHandler and sending in image, column and rows
-            explosionHandler = new ExplosionHandler(expolsionImg1, expolsionImg2, 8, 8);
-            //Creates powerupHandler with powerup images
-            powerupHandler = new PowerupHandler(powerupWingsImg, powerupLivesImg);
+            //Creates explosionManager and sending in image, column and rows
+            explosionManager = new ExplosionManager(expolsionImg1, expolsionImg2, 8, 8);
+            //Creates powerupManager with powerup images
+            powerupManager = new PowerupManager(powerupWingsImg, powerupLivesImg);
 
             //Creates the cursor that follows the cursor
             cursor = new Cursor(cursorImg, cursorClickImg, 50, 50);
@@ -182,7 +182,7 @@ namespace StarWars
             cursor.Update();
 
             //Update the enemies
-            enemyHandler.Update();
+            enemyManager.Update();
 
             CursorCollisions();
 
@@ -212,16 +212,16 @@ namespace StarWars
                 gameState = GameState.Pause;
 
             //Update the enemies
-            enemyHandler.Update();
+            enemyManager.Update();
 
             //Update the player
             player.Update();
 
             //Update the powerups
-            powerupHandler.Update();
+            powerupManager.Update();
 
             //Update the explosions
-            explosionHandler.Update();
+            explosionManager.Update();
 
             //Check collisions between gameobjects
             Collisions();
@@ -308,7 +308,7 @@ namespace StarWars
         private void DrawMainMenu()
         {
             //Draw the enemies
-            enemyHandler.Draw(spriteBatch);
+            enemyManager.Draw(spriteBatch);
             
             //Draw the gamelogo in the middle of the screen
             spriteBatch.Draw(gameLogoImg, new Rectangle((windowWidth/2) - 300, 100, 600, 271), Color.White);
@@ -329,16 +329,16 @@ namespace StarWars
         private void DrawGame()
         {
             //Draws the powerups
-            powerupHandler.Draw(spriteBatch);
+            powerupManager.Draw(spriteBatch);
 
             //Draw the enemies
-            enemyHandler.Draw(spriteBatch);
+            enemyManager.Draw(spriteBatch);
 
             //Draw the xwing
             player.Draw(spriteBatch);
 
             //Draws the expolisions
-            explosionHandler.Draw(spriteBatch);
+            explosionManager.Draw(spriteBatch);
 
             //Draw the score
             spriteBatch.DrawString(scoreFont, $"Score: {totalPoints}", new Vector2(10, 75), Color.White);
@@ -350,16 +350,16 @@ namespace StarWars
         private void DrawPauseMenu()
         {
             //Draws the powerups
-            powerupHandler.Draw(spriteBatch);
+            powerupManager.Draw(spriteBatch);
 
             //Draw the enemies
-            enemyHandler.Draw(spriteBatch);
+            enemyManager.Draw(spriteBatch);
 
             //Draw the xwing
             player.Draw(spriteBatch);
 
             //Draws the expolisions
-            explosionHandler.Draw(spriteBatch);
+            explosionManager.Draw(spriteBatch);
 
             //Draw the score
             spriteBatch.DrawString(scoreFont, $"Score: {totalPoints}", new Vector2(10, 75), Color.White);
@@ -394,10 +394,10 @@ namespace StarWars
         /// </summary>
         private void GameReset()
         {
-            enemyHandler.Reset();
+            enemyManager.Reset();
             player.Reset();
-            powerupHandler.Reset();
-            explosionHandler.Reset();
+            powerupManager.Reset();
+            explosionManager.Reset();
 
             //Set the score back to 0
             totalPoints = 0;
@@ -409,9 +409,9 @@ namespace StarWars
         /// </summary>
         private void Collisions()
         {
-            foreach (Enemy enemy in enemyHandler.Enemies)
+            foreach (Enemy enemy in enemyManager.Enemies)
             {
-                foreach (Laser laser in player.LaserHandler.Lasers)
+                foreach (Laser laser in player.LaserManager.Lasers)
                 {
                     //Remove lasers that hits enemies and remove the enemy that gets hit
                     if (laser.Hitbox.Intersects(enemy.Hitbox))
@@ -447,7 +447,7 @@ namespace StarWars
                     AddPoints(-100);
                 }
             }
-            foreach (Powerup powerup in powerupHandler.Powerups)
+            foreach (Powerup powerup in powerupManager.Powerups)
             {
                 //Check if the player hits a powerup
                 if (player.Hitbox.Intersects(powerup.Hitbox))
@@ -468,7 +468,7 @@ namespace StarWars
         private void CursorCollisions()
         {
             //Loop through all enemies
-            foreach (Enemy enemy in enemyHandler.Enemies)
+            foreach (Enemy enemy in enemyManager.Enemies)
             {
                 //Check if the enemy and cursor intersects and the left mouse button is clicked
                 if (cursor.Hitbox.Intersects(enemy.Hitbox) && cursor.CursorState == CursorState.Click)
@@ -483,7 +483,7 @@ namespace StarWars
         /// <param name="position">The position where the middle of the explosion should spawn</param>
         private void SpawnExplosions(Vector2 position)
         {
-            explosionHandler.AddExplosion(position);
+            explosionManager.AddExplosion(position);
         }
 
         /// <summary>
@@ -496,12 +496,12 @@ namespace StarWars
         }
 
         /// <summary>
-        /// Make the <c>player</c> no longer alive if the <c>enemyHandler</c> marks that a <c>mustDie</c>
+        /// Make the <c>player</c> no longer alive if the <c>enemyManager</c> marks that a <c>mustDie</c>
         /// <c>enemy</c> has gone outside of the screen
         /// </summary>
         private void KillPlayerCheck()
         {
-            if (enemyHandler.GameOver)
+            if (enemyManager.GameOver)
                 player.Alive = false;
         }
     }

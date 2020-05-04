@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace StarWars
 {
-    class ExplosionHandler
+    class ExplosionManager
     {
         private Random random = new Random();
 
@@ -16,13 +16,13 @@ namespace StarWars
         private List<Explosion> explosions = new List<Explosion>();
 
         /// <summary>
-        /// Constructor for <c>ExplosionHandler</c>
+        /// Constructor for <c>ExplosionManager</c>
         /// </summary>
         /// <param name="texture1">First explosion texture</param>
         /// <param name="texture2">Second explosion texture</param>
         /// <param name="rows">Animation rows of the textures</param>
         /// <param name="columns">Animation columns of the textures</param>
-        public ExplosionHandler(Texture2D texture1, Texture2D texture2, int rows, int columns)
+        public ExplosionManager(Texture2D texture1, Texture2D texture2, int rows, int columns)
         {
             this.texture1 = texture1;
             this.texture2 = texture2;
@@ -52,7 +52,7 @@ namespace StarWars
         }
 
         /// <summary>
-        /// Reseting the <c>explosionHandler</c>, so the game can be played again
+        /// Reseting the <c>explosionManager</c>, so the game can be played again
         /// </summary>
         public void Reset()
         {
