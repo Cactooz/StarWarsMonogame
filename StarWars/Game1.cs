@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Linq;
 
 namespace StarWars
 {
@@ -18,9 +19,13 @@ namespace StarWars
         private ExplosionManager explosionManager;
         private PowerupManager powerupManager;
         private Cursor cursor;
+        private TextBoxInputManager textBoxInputManager = new TextBoxInputManager();
+
+        //Create the highscoreManager object
+        private HighscoreManager highscoreManager = new HighscoreManager("higscores.lst");
 
         //Button objects
-        private Button startButton, exitButton, resumeButton, mainMenuButton;
+        private Button startButton, exitButton, resumeButton, mainMenuButton, highscoreButton;
 
         //Enumerations objects for the state of the game
         private GameState gameState;
@@ -72,10 +77,14 @@ namespace StarWars
             IsMouseVisible = false;
 
             //Fullscreen
-            graphics.IsFullScreen = false;
+            graphics.IsFullScreen = true;
 
             //Set the game state to the main menu
             gameState = GameState.MainMenu;
+
+            //Search for a highscore file and load in the data
+            highscoreManager.SearchForFile();
+            highscoreManager.ReadData();
 
             base.Initialize();
         }
@@ -133,7 +142,9 @@ namespace StarWars
             //Resume button on pause scene
             resumeButton = new Button(buttonImg, 400, 200, new Vector2((windowWidth / 2) - 200, (windowHeight / 2) - 200), "resume", bigFont);
             //Main Menu button for going to the main menu
-            mainMenuButton = new Button(buttonImg, 400, 200, new Vector2((windowWidth / 2) - 200, (windowHeight / 2)), "main menu", bigFont);
+            mainMenuButton = new Button(buttonImg, 400, 200, new Vector2((windowWidth / 2) - 200, windowHeight - 300), "main menu", bigFont);
+            //Highscore button on the main menu and game over menu
+            highscoreButton = new Button(buttonImg, 300, 150, new Vector2((windowWidth / 2) - 150, windowHeight - 250), "highscores", bigFont);
         }
 
         /// <summary>
@@ -166,6 +177,9 @@ namespace StarWars
                     break;
                 case GameState.GameOver:
                     UpdateGameOver();
+                    break;
+                case GameState.Highscore:
+                    UpdateHighscoreMenu();
                     break;
             }
 
@@ -200,6 +214,12 @@ namespace StarWars
             exitButton.Update();
             if (exitButton.State == ClickableButtonState.Clicked)
                 Exit();
+
+            //Update the button, if it's clicked open the highscore menu
+            highscoreButton.Update();
+            if (highscoreButton.State == ClickableButtonState.Clicked)
+                gameState = GameState.Highscore;
+
         }
 
         /// <summary>
@@ -269,6 +289,27 @@ namespace StarWars
         }
 
         /// <summary>
+        /// This is called when the highscore menu should update itself.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        private void UpdateHighscoreMenu()
+        {
+            //Update the cursor
+            cursor.Update();
+
+            //Update the enemies
+            enemyManager.Update();
+
+            //Get key input for writing highscore name
+            textBoxInputManager.GetKeyInput();
+
+            //Update the button, if it's clicked open the main menu
+            mainMenuButton.Update();
+            if (mainMenuButton.State == ClickableButtonState.Clicked)
+                gameState = GameState.MainMenu;
+        }
+
+        /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
@@ -296,6 +337,9 @@ namespace StarWars
                 case GameState.GameOver:
                     DrawGameOver();
                     break;
+                case GameState.Highscore:
+                    DrawHighscoreMenu();
+                    break;
             }
 
             spriteBatch.End();
@@ -318,6 +362,9 @@ namespace StarWars
 
             //Draw the exit button
             exitButton.Draw(spriteBatch);
+
+            //Draw the highscore button
+            highscoreButton.Draw(spriteBatch);
 
             //Draw the cursor (Keep last so it's above everything)
             cursor.Draw(spriteBatch);
@@ -390,6 +437,24 @@ namespace StarWars
         }
 
         /// <summary>
+        /// This is called when the highscore menu should draw itself.
+        /// </summary>
+        private void DrawHighscoreMenu()
+        {
+            //Draw the enemies
+            enemyManager.Draw(spriteBatch);
+
+            //Draw the main menu button
+            mainMenuButton.Draw(spriteBatch);
+
+            //Draw the score big
+            spriteBatch.DrawString(bigFont, textBoxInputManager.HighscoreName, new Vector2((windowWidth / 2) - (bigFont.MeasureString(textBoxInputManager.HighscoreName).X / 2), (windowHeight / 2) - (bigFont.MeasureString(textBoxInputManager.HighscoreName).Y / 2) - 100), Color.White);
+
+            //Draw the cursor (Keep last so it's above everything)
+            cursor.Draw(spriteBatch);
+        }
+
+        /// <summary>
         /// Reseting the game so it can be played again
         /// </summary>
         private void GameReset()
@@ -421,7 +486,7 @@ namespace StarWars
 
                         laser.Alive = false;
                         enemy.Hitpoints--;
-                        SpawnExplosions(laser.Position);
+                        explosionManager.AddExplosion(laser.Position);
                     }
                 }
 
@@ -441,7 +506,7 @@ namespace StarWars
                     }
 
                     //Spawn an explosion at the bottom middle of the enemy
-                    SpawnExplosions(new Vector2(enemy.Position.X + (enemy.Hitbox.Width / 2), enemy.Position.Y + enemy.Hitbox.Height));
+                    explosionManager.AddExplosion(new Vector2(enemy.Position.X + (enemy.Hitbox.Width / 2), enemy.Position.Y + enemy.Hitbox.Height));
 
                     //Add netagive points to remove points from the totalpoints
                     AddPoints(-100);
@@ -475,15 +540,6 @@ namespace StarWars
                     //Kill and remove the enemy
                     enemy.Alive = false;
             }
-        }
-
-        /// <summary>
-        /// Spawns one of two different explosions at the defined position
-        /// </summary>
-        /// <param name="position">The position where the middle of the explosion should spawn</param>
-        private void SpawnExplosions(Vector2 position)
-        {
-            explosionManager.AddExplosion(position);
         }
 
         /// <summary>

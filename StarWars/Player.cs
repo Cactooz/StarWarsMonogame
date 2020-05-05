@@ -12,8 +12,7 @@ namespace StarWars
         private LaserManager laserManager;
 
         //Keyboard states for the player
-        private KeyboardState kNewState;
-        private KeyboardState kOldState;
+        private KeyboardState kNewState, kOldState;
 
         private Texture2D laserTexture;
         //Texture for the xwing when it has both wings out

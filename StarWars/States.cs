@@ -4,9 +4,9 @@ namespace StarWars
 {
     /// <summary>
     /// Current state of the game
-    /// Normal, Game, Pause & GameOver
+    /// Normal, Game, Pause, GameOver & Highscore
     /// </summary>
-    public enum GameState { MainMenu, Game, Pause, GameOver }
+    public enum GameState { MainMenu, Game, Pause, GameOver, Highscore }
 
     /// <summary>
     /// Current state of button

@@ -47,8 +47,7 @@ namespace StarWars
         /// <param name="text">Text that should be displayed in the middle of the <c>button</c></param>
         public Button(Texture2D texture, int hitboxX, int hitboxY, Vector2 position, string text, SpriteFont font) : base(texture, hitboxX, hitboxY)
         {
-            //Set the hitbox position to the gotten position
-            hitbox.Location = position.ToPoint();
+            Position = position;
 
             this.text = text;
             this.font = font;
@@ -74,6 +73,9 @@ namespace StarWars
             }
             else
                 state = ClickableButtonState.Normal;
+
+            //Set the hitbox position to the gotten position
+            hitbox.Location = position.ToPoint();
 
             //Save the current mouse state as the old one
             mOldState = mNewState;
