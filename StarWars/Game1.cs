@@ -41,7 +41,7 @@ namespace StarWars
         private Texture2D xwingImg, xwingFullImg, tieFighterImg, devastatorImg, laser, backgroundImg, tieBomberImg, tieInterceptorImg, lambdaImg, expolsionImg1, expolsionImg2, powerupWingsImg, powerupLivesImg, buttonImg, gameLogoImg, cursorImg, cursorClickImg;
 
         //Font for the game
-        private SpriteFont scoreFont, bigFont;
+        private SpriteFont scoreFont, smallFont, mediumFont, bigFont, massiveFont;
 
         public Game1()
         {
@@ -80,7 +80,7 @@ namespace StarWars
             graphics.IsFullScreen = true;
 
             //Set the game state to the main menu
-            gameState = GameState.MainMenu;
+            gameState = GameState.GameOver;
 
             //Search for a highscore file and load in the data
             highscoreManager.SearchForFile();
@@ -133,18 +133,21 @@ namespace StarWars
 
             //Load in fonts
             scoreFont = Content.Load<SpriteFont>("scorefont");
+            smallFont = Content.Load<SpriteFont>("smallfont");
+            mediumFont = Content.Load<SpriteFont>("mediumfont");
             bigFont = Content.Load<SpriteFont>("bigfont");
+            massiveFont = Content.Load<SpriteFont>("massivefont");
 
             //Start button on main menu scene
             startButton = new Button(buttonImg, 400, 200, new Vector2((windowWidth / 2) - 200, (windowHeight / 2) - 100), "play", bigFont);
             //Exit button on main menu scene
-            exitButton = new Button(buttonImg, 200, 100, new Vector2(10, 10), "exit", bigFont);
+            exitButton = new Button(buttonImg, 200, 100, new Vector2(10, 10), "exit", smallFont);
             //Resume button on pause scene
             resumeButton = new Button(buttonImg, 400, 200, new Vector2((windowWidth / 2) - 200, (windowHeight / 2) - 200), "resume", bigFont);
             //Main Menu button for going to the main menu
-            mainMenuButton = new Button(buttonImg, 400, 200, new Vector2((windowWidth / 2) - 200, windowHeight - 300), "main menu", bigFont);
+            mainMenuButton = new Button(buttonImg, 400, 200, new Vector2((windowWidth / 2) - 200, windowHeight - 300), "main menu", mediumFont);
             //Highscore button on the main menu and game over menu
-            highscoreButton = new Button(buttonImg, 300, 150, new Vector2((windowWidth / 2) - 150, windowHeight - 250), "highscores", bigFont);
+            highscoreButton = new Button(buttonImg, 300, 150, new Vector2((windowWidth / 2) - 150, windowHeight - 250), "highscores", smallFont);
         }
 
         /// <summary>
@@ -438,15 +441,38 @@ namespace StarWars
             //Draw the main menu button
             mainMenuButton.Draw(spriteBatch);
 
-            //Draw the score big
-            spriteBatch.DrawString(bigFont, $"Score: {totalPoints}", new Vector2((windowWidth / 2) - (bigFont.MeasureString($"Score: {totalPoints}").X / 2), (windowHeight / 2) - (bigFont.MeasureString($"Score: {totalPoints}").Y / 2) - 100), Color.White);
-
-            //Draw NEW HIGHSCORE if the new highscore is the highest ever
+            //Draw if its a new top highscore
             if (highscoreManager.CheckTopNewHighscore(totalPoints))
-                spriteBatch.DrawString(bigFont,$"new highscore", new Vector2((windowWidth / 2) - (bigFont.MeasureString("new highscore").X / 2), 50 + bigFont.MeasureString("new highscore").Y), Color.White);
+            {
+                //New Highscore at the top of the screen
+                spriteBatch.DrawString(massiveFont, $"new highscore", new Vector2((windowWidth / 2) - (massiveFont.MeasureString("new highscore").X / 2), 50 + massiveFont.MeasureString("new highscore").Y), Color.White);
 
-            //Draw the highscore name
-            spriteBatch.DrawString(bigFont, textBoxInputManager.HighscoreName, new Vector2((windowWidth / 2) - (bigFont.MeasureString(textBoxInputManager.HighscoreName).X / 2), (windowHeight / 2) - (bigFont.MeasureString(textBoxInputManager.HighscoreName).Y / 2) - 100), Color.White);
+                //Draw the score and the points below
+                spriteBatch.DrawString(mediumFont, $"your score", new Vector2((windowWidth / 2) - (mediumFont.MeasureString($"your score").X / 2), (windowHeight / 2) - (mediumFont.MeasureString($"your score").Y / 2) - 175), Color.White);
+                spriteBatch.DrawString(bigFont, $"{totalPoints}", new Vector2((windowWidth / 2) - (bigFont.MeasureString($"{totalPoints}").X / 2), (windowHeight / 2) - (bigFont.MeasureString($"{totalPoints}").Y / 2) - 100), Color.White);
+
+                //Draw "your name" over the player text input
+                spriteBatch.DrawString(mediumFont, "your name", new Vector2((windowWidth / 2) - (mediumFont.MeasureString("your name").X / 2), (windowHeight / 2) - (mediumFont.MeasureString("your name").Y / 2) + 25), Color.White);
+                spriteBatch.DrawString(bigFont, textBoxInputManager.HighscoreName, new Vector2((windowWidth / 2) - (bigFont.MeasureString(textBoxInputManager.HighscoreName).X / 2), (windowHeight / 2) - (bigFont.MeasureString(textBoxInputManager.HighscoreName).Y / 2) + 100), Color.White);
+            }
+            //Draw the highscore name input if the score is bigger then the worst stores one
+            else if (highscoreManager.CheckNewHighscore(totalPoints))
+            {
+                //Draw the score and the points below
+                spriteBatch.DrawString(mediumFont, $"your score", new Vector2((windowWidth / 2) - (mediumFont.MeasureString($"your score").X / 2), (windowHeight / 2) - (mediumFont.MeasureString($"your score").Y / 2) - 175), Color.White);
+                spriteBatch.DrawString(bigFont, $"{totalPoints}", new Vector2((windowWidth / 2) - (bigFont.MeasureString($"{totalPoints}").X / 2), (windowHeight / 2) - (bigFont.MeasureString($"{totalPoints}").Y / 2) - 100), Color.White);
+
+                //Draw "your name" over the player text input
+                spriteBatch.DrawString(mediumFont, "your name", new Vector2((windowWidth / 2) - (mediumFont.MeasureString("your name").X / 2), (windowHeight / 2) - (mediumFont.MeasureString("your name").Y / 2) + 25), Color.White);
+                spriteBatch.DrawString(bigFont, textBoxInputManager.HighscoreName, new Vector2((windowWidth / 2) - (bigFont.MeasureString(textBoxInputManager.HighscoreName).X / 2), (windowHeight / 2) - (bigFont.MeasureString(textBoxInputManager.HighscoreName).Y / 2) + 100), Color.White);
+            }
+            //Otherwise just write the score
+            else
+            {
+                //Draw the score and the points below
+                spriteBatch.DrawString(mediumFont, $"your score", new Vector2((windowWidth / 2) - (mediumFont.MeasureString($"your score").X / 2), (windowHeight / 2) - (mediumFont.MeasureString($"your score").Y / 2) - 75), Color.White);
+                spriteBatch.DrawString(bigFont, $"{totalPoints}", new Vector2((windowWidth / 2) - (bigFont.MeasureString($"{totalPoints}").X / 2), (windowHeight / 2) - (bigFont.MeasureString($"{totalPoints}").Y / 2)), Color.White);
+            }
 
             //Draw the cursor (Keep last so it's above everything)
             cursor.Draw(spriteBatch);

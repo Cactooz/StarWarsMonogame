@@ -51,6 +51,9 @@ namespace StarWars
 
             this.text = text;
             this.font = font;
+
+            //Set the hitbox position to the gotten position
+            hitbox.Location = position.ToPoint();
         }
 
         /// <summary>
@@ -58,6 +61,9 @@ namespace StarWars
         /// </summary>
         public override void Update()
         {
+            //Set the hitbox position to the gotten position
+            hitbox.Location = position.ToPoint();
+
             //Get current mousestate
             mNewState = Mouse.GetState();
 
@@ -73,9 +79,6 @@ namespace StarWars
             }
             else
                 state = ClickableButtonState.Normal;
-
-            //Set the hitbox position to the gotten position
-            hitbox.Location = position.ToPoint();
 
             //Save the current mouse state as the old one
             mOldState = mNewState;
@@ -111,7 +114,7 @@ namespace StarWars
         {
             //If the button has text, draw it in the middle of the button
             if (text != null)
-                spriteBatch.DrawString(font, text, new Vector2(Hitbox.X + (Hitbox.Width / 2) - (font.MeasureString(text).X / 2), Hitbox.Y + (Hitbox.Height / 2) - (font.MeasureString(text).Y / 2)), new Color(210, 210, 210));
+                spriteBatch.DrawString(font, text, new Vector2(Hitbox.X + (Hitbox.Width / 2) - (font.MeasureString(text).X / 2), Hitbox.Y + (Hitbox.Height / 2) - (font.MeasureString(text).Y / 2)), new Color(245, 245, 245));
         }
     }
 }

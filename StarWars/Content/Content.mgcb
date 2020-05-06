@@ -128,6 +128,20 @@
 /processorParam:TextureFormat=Color
 /build:laser.png
 
+#begin massivefont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:massivefont.spritefont
+
+#begin mediumfont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:mediumfont.spritefont
+
 #begin powerup4wing.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -158,6 +172,13 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:scorefont.spritefont
+
+#begin smallfont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:smallfont.spritefont
 
 #begin stars.png
 /importer:TextureImporter
