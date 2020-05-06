@@ -59,16 +59,28 @@ namespace StarWars
                 //Make sure that there are 3 items
                 if (items.Length == 3)
                 {
-                    //Set the first item as name
+                    //If the name is empty add a placeholder name
+                    if (items[0] == "" || items[0] == " " || items[0] == null)
+                        items[0] = "no name";
+
+                    //If the score is empty add a placeholder score
+                    if (items[1] == "" || items[1] == " " || items[1] == null)
+                        items[1] = "-1138";
+
+                    //If the date is empty add a placeholder date
+                    if (items[2] == "" || items[2] == " " || items[2] == null)
+                        items[2] = "04-05-1977";
+
+                    //Set the first item as name, in lowercase letters
                     //Convert the second item into a int and set the score as it
                     //Set the date to the third item
-                    newHighscore = new Highscore(items[0], Convert.ToInt32(items[1]), items[2]);
-                }
+                    newHighscore = new Highscore(items[0].ToLower(), Convert.ToInt32(items[1]), items[2]);
+                } 
                 //Otherwise add in error data
                 else
                 {
                     //Set the name to "Error", score to 0 and the data to May 4th 1977
-                    newHighscore = new Highscore("Error", 0, "04-05-1977");
+                    newHighscore = new Highscore("error", 0, "04-05-1977");
                 }
 
                 //Add the highscore to the list highscores
@@ -77,21 +89,45 @@ namespace StarWars
         }
 
         /// <summary>
-        /// Save all the data seperated by commas
+        /// Save the top 10 <c>highscore</c> data seperated by commas
         /// </summary>
         public void SaveData()
         {
             //List for all lines that should be written to the file
             List<string> saveData = new List<string>();
 
-            //Add all the lines that should be written
-            foreach (Highscore highscore in highscores)
+            //If there are less than 10 highscores add all other them
+            if (highscores.Count < 10)
             {
-                saveData.Add($"{highscore.Name},{highscore.Score},{highscore.Date}");
+                foreach (Highscore highscore in highscores)
+                {
+                    saveData.Add($"{highscore.Name},{highscore.Score},{highscore.Date}");
+                }
+            }
+            //Otherwise only save the first 10 scores
+            else
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    saveData.Add($"{highscores[i].Name},{highscores[i].Score},{highscores[i].Date}");
+                }
             }
 
             //Write all the saveData to the file
             File.WriteAllLines(filePath, saveData);
+        }
+
+        /// <summary>
+        /// Check a new highscore with the top score of the <c>highscores</c>,
+        /// </summary>
+        /// <param name="newScore">The new score that should be checked with the top <c>highscores</c> score</param>
+        /// <returns>Returns true or false</returns>
+        public bool CheckTopNewHighscore(int newScore)
+        {
+            if (highscores.Count == 0 || newScore > highscores[0].Score)
+                return true;
+            else
+                return false;
         }
 
         /// <summary>

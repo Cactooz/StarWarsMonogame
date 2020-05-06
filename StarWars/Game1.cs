@@ -213,7 +213,11 @@ namespace StarWars
             //Update the button, if it's clicked close the game
             exitButton.Update();
             if (exitButton.State == ClickableButtonState.Clicked)
+            {
+                highscoreManager.SaveData();
+
                 Exit();
+            }
 
             //Update the button, if it's clicked open the highscore menu
             highscoreButton.Update();
@@ -282,10 +286,18 @@ namespace StarWars
             //Update the cursor
             cursor.Update();
 
+            //Get key input for writing highscore name
+            textBoxInputManager.GetKeyInput();
+
             //Update the button, if it's clicked open the main menu
             mainMenuButton.Update();
             if (mainMenuButton.State == ClickableButtonState.Clicked)
+            {
+                if (highscoreManager.CheckNewHighscore(totalPoints))
+                    highscoreManager.AddNewHighscore(textBoxInputManager.HighscoreName, totalPoints);
+
                 gameState = GameState.MainMenu;
+            } 
         }
 
         /// <summary>
@@ -299,9 +311,6 @@ namespace StarWars
 
             //Update the enemies
             enemyManager.Update();
-
-            //Get key input for writing highscore name
-            textBoxInputManager.GetKeyInput();
 
             //Update the button, if it's clicked open the main menu
             mainMenuButton.Update();
@@ -432,6 +441,13 @@ namespace StarWars
             //Draw the score big
             spriteBatch.DrawString(bigFont, $"Score: {totalPoints}", new Vector2((windowWidth / 2) - (bigFont.MeasureString($"Score: {totalPoints}").X / 2), (windowHeight / 2) - (bigFont.MeasureString($"Score: {totalPoints}").Y / 2) - 100), Color.White);
 
+            //Draw NEW HIGHSCORE if the new highscore is the highest ever
+            if (highscoreManager.CheckTopNewHighscore(totalPoints))
+                spriteBatch.DrawString(bigFont,$"new highscore", new Vector2((windowWidth / 2) - (bigFont.MeasureString("new highscore").X / 2), 50 + bigFont.MeasureString("new highscore").Y), Color.White);
+
+            //Draw the highscore name
+            spriteBatch.DrawString(bigFont, textBoxInputManager.HighscoreName, new Vector2((windowWidth / 2) - (bigFont.MeasureString(textBoxInputManager.HighscoreName).X / 2), (windowHeight / 2) - (bigFont.MeasureString(textBoxInputManager.HighscoreName).Y / 2) - 100), Color.White);
+
             //Draw the cursor (Keep last so it's above everything)
             cursor.Draw(spriteBatch);
         }
@@ -446,9 +462,6 @@ namespace StarWars
 
             //Draw the main menu button
             mainMenuButton.Draw(spriteBatch);
-
-            //Draw the score big
-            spriteBatch.DrawString(bigFont, textBoxInputManager.HighscoreName, new Vector2((windowWidth / 2) - (bigFont.MeasureString(textBoxInputManager.HighscoreName).X / 2), (windowHeight / 2) - (bigFont.MeasureString(textBoxInputManager.HighscoreName).Y / 2) - 100), Color.White);
 
             //Draw the cursor (Keep last so it's above everything)
             cursor.Draw(spriteBatch);
