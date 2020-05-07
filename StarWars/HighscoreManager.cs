@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,6 +13,8 @@ namespace StarWars
         private string dateFormat = "dd/MM/yyyy";
         private string filePath;
 
+        private Texture2D plateBackground;
+
         //Make a new list of Highscore
         private List<Highscore> highscores = new List<Highscore>();
 
@@ -20,6 +24,12 @@ namespace StarWars
         public List<Highscore> Highscores { get => highscores; }
 
         /// <summary>
+        /// Set the texture of the <c>platebackground</c> for the highscores
+        /// showing on the highscore display scene
+        /// </summary>
+        public Texture2D PlateBackground { set => plateBackground = value; }
+
+        /// <summary>
         /// Constructor for <c>HighscoreManager</c>
         /// </summary>
         /// <param name="fileName">The fileName that the file has</param>
@@ -27,6 +37,50 @@ namespace StarWars
         {
             //The path to the file, combine the directory and the fileName
             filePath = Path.Combine(Environment.CurrentDirectory, fileName);
+        }
+
+        /// <summary>
+        /// Draw the highscores, moving the plates depending on how many
+        /// highscores are added, between 0-10
+        /// </summary>
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            Rectangle hitbox = new Rectangle();
+            hitbox.Size = new Point(600, 156);
+
+            if (highscores.Count < 5)
+            {
+                Vector2 startPos = new Vector2(Game1.WindowWidth / 2 - hitbox.Width / 2, 50);
+                for (int i = 0; i < highscores.Count; i++)
+                {
+                    hitbox.Location = new Vector2(startPos.X, (i * 184) + startPos.Y + 20).ToPoint();
+
+                    spriteBatch.Draw(plateBackground, hitbox, Color.White);
+                }
+            }
+            else
+            {
+                hitbox.Size = new Point(482, 125);
+                for (int i = 0; i < highscores.Count; i++)
+                {
+                    if (i < 5)
+                    {
+                        Vector2 startPos = new Vector2((Game1.WindowWidth / 2) - hitbox.Width - 50, 50);
+
+                        hitbox.Location = new Vector2(startPos.X, (i * 184) + startPos.Y + 20).ToPoint();
+
+                        spriteBatch.Draw(plateBackground, hitbox, Color.White);
+                    }
+                    else
+                    {
+                        Vector2 startPos = new Vector2((Game1.WindowWidth / 2) + 50, 50);
+
+                        hitbox.Location = new Vector2(startPos.X, ((i - 5) * 184) + startPos.Y + 20).ToPoint();
+
+                        spriteBatch.Draw(plateBackground, hitbox, Color.White);
+                    }
+                }
+            }
         }
 
         /// <summary>

@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System.Linq;
 
 namespace StarWars
 {
@@ -25,7 +24,7 @@ namespace StarWars
         private HighscoreManager highscoreManager = new HighscoreManager("higscores.lst");
 
         //Button objects
-        private Button startButton, exitButton, resumeButton, mainMenuButton, highscoreButton;
+        private Button startButton, exitButton, resumeButton, mainMenuButton, highscoreButton, backButton;
 
         //Enumerations objects for the state of the game
         private GameState gameState;
@@ -38,7 +37,7 @@ namespace StarWars
         private int totalPoints = 0;
 
         //Textures for the gameObjects
-        private Texture2D xwingImg, xwingFullImg, tieFighterImg, devastatorImg, laser, backgroundImg, tieBomberImg, tieInterceptorImg, lambdaImg, expolsionImg1, expolsionImg2, powerupWingsImg, powerupLivesImg, buttonImg, gameLogoImg, cursorImg, cursorClickImg;
+        private Texture2D xwingImg, xwingFullImg, tieFighterImg, devastatorImg, laser, backgroundImg, tieBomberImg, tieInterceptorImg, lambdaImg, expolsionImg1, expolsionImg2, powerupWingsImg, powerupLivesImg, buttonImg, gameLogoImg, cursorImg, cursorClickImg, highscoreplackImg;
 
         //Font for the game
         private SpriteFont scoreFont, smallFont, mediumFont, bigFont, massiveFont;
@@ -80,7 +79,7 @@ namespace StarWars
             graphics.IsFullScreen = true;
 
             //Set the game state to the main menu
-            gameState = GameState.GameOver;
+            gameState = GameState.MainMenu;
 
             //Search for a highscore file and load in the data
             highscoreManager.SearchForFile();
@@ -116,6 +115,7 @@ namespace StarWars
             gameLogoImg = Content.Load<Texture2D>("gamelogo");
             cursorImg = Content.Load<Texture2D>("cursor");
             cursorClickImg = Content.Load<Texture2D>("cursorclick");
+            highscoreplackImg = Content.Load<Texture2D>("highscoreplack");
 
             //Creates the player
             player = new Player(xwingImg, xwingFullImg, (xwingImg.Width / 5), (xwingImg.Height / 5), 10f, 3, laser);
@@ -131,6 +131,9 @@ namespace StarWars
             //Creates the cursor that follows the cursor
             cursor = new Cursor(cursorImg, cursorClickImg, 50, 50);
 
+            //Set the plate background for the highscoremanager
+            highscoreManager.PlateBackground = highscoreplackImg;
+
             //Load in fonts
             scoreFont = Content.Load<SpriteFont>("scorefont");
             smallFont = Content.Load<SpriteFont>("smallfont");
@@ -141,13 +144,15 @@ namespace StarWars
             //Start button on main menu scene
             startButton = new Button(buttonImg, 400, 200, new Vector2((windowWidth / 2) - 200, (windowHeight / 2) - 100), "play", bigFont);
             //Exit button on main menu scene
-            exitButton = new Button(buttonImg, 200, 100, new Vector2(10, 10), "exit", smallFont);
+            exitButton = new Button(buttonImg, 150, 75, new Vector2(windowWidth - 160, 10), "exit", smallFont);
             //Resume button on pause scene
             resumeButton = new Button(buttonImg, 400, 200, new Vector2((windowWidth / 2) - 200, (windowHeight / 2) - 200), "resume", bigFont);
             //Main Menu button for going to the main menu
             mainMenuButton = new Button(buttonImg, 400, 200, new Vector2((windowWidth / 2) - 200, windowHeight - 300), "main menu", mediumFont);
             //Highscore button on the main menu and game over menu
             highscoreButton = new Button(buttonImg, 300, 150, new Vector2((windowWidth / 2) - 150, windowHeight - 250), "highscores", smallFont);
+            //Back button to go back to the last scene, most of the time main menu
+            backButton = new Button(buttonImg, 200, 100, new Vector2(10, 10), "back", smallFont);
         }
 
         /// <summary>
@@ -316,8 +321,8 @@ namespace StarWars
             enemyManager.Update();
 
             //Update the button, if it's clicked open the main menu
-            mainMenuButton.Update();
-            if (mainMenuButton.State == ClickableButtonState.Clicked)
+            backButton.Update();
+            if (backButton.State == ClickableButtonState.Clicked)
                 gameState = GameState.MainMenu;
         }
 
@@ -487,7 +492,10 @@ namespace StarWars
             enemyManager.Draw(spriteBatch);
 
             //Draw the main menu button
-            mainMenuButton.Draw(spriteBatch);
+            backButton.Draw(spriteBatch);
+
+            //Draw the player highscore placks
+            highscoreManager.Draw(spriteBatch);
 
             //Draw the cursor (Keep last so it's above everything)
             cursor.Draw(spriteBatch);
