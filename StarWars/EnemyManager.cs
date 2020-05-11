@@ -114,7 +114,7 @@ namespace StarWars
             //Spawn boss enemies (that must die)
             //Layout: texture, timer, spawnTime, hitBoxX, hitBoxY, speed, lives
             SpawnBoss(devastatorTexture, devastatorTimer, 35, 350, 600, 0.5f, 75);
-            SpawnBoss(lambdaTexture, lambdaTimer, 45, 150, 146, 4.5f, 10);
+            SpawnBoss(lambdaTexture, lambdaTimer, 75, 150, 146, 3.5f, 10);
         }
 
         /// <summary>

@@ -14,11 +14,16 @@ namespace StarWars
 
         //Date format day/month/year (04/05/2020 - May the 4th be with you :D)
         private string dateFormat = "dd/MM/yyyy";
-        private string filePath;
+
+        //The path to the directory, combine the %appdata% directory with a new folder called SW-SI
+        private static string directoryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SW-SI");
+        //The path to the file, combine the directoryPath and the file name
+        private string filePath = Path.Combine(directoryPath, "highscores.lst");
 
         //Default names that will be added if the name is left empty
         private string[] defaultNames = new string[] { "rey skywalker", "finn", "poe dameron", "bb-8", "r2-d2", "d-o", "c-3pO", "luke skywalker", "leia organa", "kylo ren", "palpatine", "darth vader", "han solo", "padme amidala", "supreme leader snoke", "obi-wan kenobi", "chewbacca", "yoda", "bomba fett", "lando calrissian", "greve dooku", "general hux", "captain phasma", "darth maul", "jar jar binks", "zorli bliss", "mace windu", "general grievous", "maz kanata", "qui-gon jinn", "grand moff tarkin", "jango fett", "watto", "vice amiral holdo", "amiral ackbar", "wedge", "jabba the hutt", "rose tico", "bossk", "cassian andor", "saw gerrera", "jyn erso", "galen erso", "k-2s0", "chirrut imwe", "orson krennic", "baze malbus", "general draven", "bodhi rook", "qi'ra", "enfys nest", "beckett", "babu frik", "porg" };
 
+        //Background for each highscore shown on the highscore scene
         private Texture2D plateBackground;
         private SpriteFont smallFont, mediumFont;
 
@@ -37,15 +42,12 @@ namespace StarWars
         /// <param name="texture">The background texture of the <c>highscore</c> plates</param>
         /// <param name="smallFont">The small font used on the <c>highscore</c> plates</param>
         /// <param name="mediumFont">The medium font used on the <c>highscore</c> plates</param>
-        public HighscoreManager(string fileName, Texture2D texture, SpriteFont smallFont, SpriteFont mediumFont)
+        public HighscoreManager(Texture2D texture, SpriteFont smallFont, SpriteFont mediumFont)
         {
             //Set the texture and fonts
             plateBackground = texture;
             this.smallFont = smallFont;
             this.mediumFont = mediumFont;
-
-            //The path to the file, combine the directory and the fileName
-            filePath = Path.Combine(Environment.CurrentDirectory, fileName);
         }
 
         /// <summary>
@@ -121,11 +123,15 @@ namespace StarWars
         }
 
         /// <summary>
+        /// Check if the file directory already exists or create it
         /// Check if the file already exists otherwise create the file
         /// </summary>
         public void SearchForFile()
         {
-            //Check if the doesn't file exists
+            //Create the directory if it doesn't exist
+            Directory.CreateDirectory(directoryPath);
+
+            //Check if the file doesn't exist
             if (!File.Exists(filePath))
                 //Create a new file and close it
                 File.Create(filePath).Dispose();

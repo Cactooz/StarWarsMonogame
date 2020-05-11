@@ -151,7 +151,7 @@ namespace StarWars
             backButton = new Button(buttonImg, 200, 100, new Vector2(10, 10), "back", smallFont);
 
             //Set the highscore file name, plate background and the fonts for the highscoremanager
-            highscoreManager = new HighscoreManager("higscores.lst", highscoreplackImg, smallFont, mediumFont);
+            highscoreManager = new HighscoreManager(highscoreplackImg, smallFont, mediumFont);
 
             //Search for a highscore file and load in the data
             highscoreManager.SearchForFile();
