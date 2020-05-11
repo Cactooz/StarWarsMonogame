@@ -7,6 +7,7 @@ namespace StarWars
 {
     class EnemyManager
     {
+        //Random number generator
         private Random random = new Random();
 
         //Add a stopwatch timer that will keep track of time

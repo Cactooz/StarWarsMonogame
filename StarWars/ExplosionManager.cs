@@ -7,9 +7,11 @@ namespace StarWars
 {
     class ExplosionManager
     {
+        //Random number generator
         private Random random = new Random();
 
         private Texture2D texture1, texture2;
+        //How many rows and columns the animated texture has
         private int rows, columns;
 
         //List containing all expolosions

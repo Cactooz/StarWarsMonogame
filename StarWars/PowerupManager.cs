@@ -7,6 +7,7 @@ namespace StarWars
 {
     class PowerupManager
     {
+        //Random number generator
         private Random random = new Random();
 
         private Texture2D texture4wings, textureLives;

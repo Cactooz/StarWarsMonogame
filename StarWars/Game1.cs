@@ -14,14 +14,14 @@ namespace StarWars
         private SpriteBatch spriteBatch;
         private Player player;
         private EnemyManager enemyManager;
-        private GameObject background;
+        private GameObject background, highscoreBackground;
         private ExplosionManager explosionManager;
         private PowerupManager powerupManager;
         private Cursor cursor;
         private TextBoxInputManager textBoxInputManager = new TextBoxInputManager();
 
         //Create the highscoreManager object
-        private HighscoreManager highscoreManager = new HighscoreManager("higscores.lst");
+        private HighscoreManager highscoreManager;
 
         //Button objects
         private Button startButton, exitButton, resumeButton, mainMenuButton, highscoreButton, backButton;
@@ -37,7 +37,7 @@ namespace StarWars
         private int totalPoints = 0;
 
         //Textures for the gameObjects
-        private Texture2D xwingImg, xwingFullImg, tieFighterImg, devastatorImg, laser, backgroundImg, tieBomberImg, tieInterceptorImg, lambdaImg, expolsionImg1, expolsionImg2, powerupWingsImg, powerupLivesImg, buttonImg, gameLogoImg, cursorImg, cursorClickImg, highscoreplackImg;
+        private Texture2D xwingImg, xwingFullImg, tieFighterImg, devastatorImg, laser, backgroundImg, tieBomberImg, tieInterceptorImg, lambdaImg, expolsionImg1, expolsionImg2, powerupWingsImg, powerupLivesImg, buttonImg, gameLogoImg, cursorImg, cursorClickImg, highscoreplackImg, highscoreBackgroundImg;
 
         //Font for the game
         private SpriteFont scoreFont, smallFont, mediumFont, bigFont, massiveFont;
@@ -81,10 +81,6 @@ namespace StarWars
             //Set the game state to the main menu
             gameState = GameState.MainMenu;
 
-            //Search for a highscore file and load in the data
-            highscoreManager.SearchForFile();
-            highscoreManager.ReadData();
-
             base.Initialize();
         }
 
@@ -116,6 +112,7 @@ namespace StarWars
             cursorImg = Content.Load<Texture2D>("cursor");
             cursorClickImg = Content.Load<Texture2D>("cursorclick");
             highscoreplackImg = Content.Load<Texture2D>("highscoreplack");
+            highscoreBackgroundImg = Content.Load<Texture2D>("metalplate");
 
             //Creates the player
             player = new Player(xwingImg, xwingFullImg, (xwingImg.Width / 5), (xwingImg.Height / 5), 10f, 3, laser);
@@ -127,12 +124,11 @@ namespace StarWars
             explosionManager = new ExplosionManager(expolsionImg1, expolsionImg2, 8, 8);
             //Creates powerupManager with powerup images
             powerupManager = new PowerupManager(powerupWingsImg, powerupLivesImg);
+            //The background on the highscore scene
+            highscoreBackground = new GameObject(highscoreBackgroundImg, windowWidth, windowHeight);
 
             //Creates the cursor that follows the cursor
             cursor = new Cursor(cursorImg, cursorClickImg, 50, 50);
-
-            //Set the plate background for the highscoremanager
-            highscoreManager.PlateBackground = highscoreplackImg;
 
             //Load in fonts
             scoreFont = Content.Load<SpriteFont>("scorefont");
@@ -153,6 +149,13 @@ namespace StarWars
             highscoreButton = new Button(buttonImg, 300, 150, new Vector2((windowWidth / 2) - 150, windowHeight - 250), "highscores", smallFont);
             //Back button to go back to the last scene, most of the time main menu
             backButton = new Button(buttonImg, 200, 100, new Vector2(10, 10), "back", smallFont);
+
+            //Set the highscore file name, plate background and the fonts for the highscoremanager
+            highscoreManager = new HighscoreManager("higscores.lst", highscoreplackImg, smallFont, mediumFont);
+
+            //Search for a highscore file and load in the data
+            highscoreManager.SearchForFile();
+            highscoreManager.ReadData();
         }
 
         /// <summary>
@@ -490,6 +493,8 @@ namespace StarWars
         {
             //Draw the enemies
             enemyManager.Draw(spriteBatch);
+
+            highscoreBackground.Draw(spriteBatch);
 
             //Draw the main menu button
             backButton.Draw(spriteBatch);

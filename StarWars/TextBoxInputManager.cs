@@ -55,8 +55,8 @@ namespace StarWars
             //Add a space if spacebar is clicked if the string is not longer than 10
             else if (key == Keys.Space && highscoreName.Length < 10)
                 highscoreName += " ";
-            //Add the letter if the string is not longer than 10
-            else if (highscoreName.Length < 10)
+            //Add the letter if the string is not longer than 15 characters
+            else if (highscoreName.Length < 15)
                 KeyToChar();
         }
 
