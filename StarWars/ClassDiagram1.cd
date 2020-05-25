@@ -1,81 +1,151 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="StarWars.Enemy" Collapsed="true">
-    <Position X="4.75" Y="1.75" Width="1.5" />
+    <Position X="5.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAgAAIAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Enemy.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="StarWars.GameObject" Collapsed="true">
-    <Position X="0.5" Y="3.25" Width="1.5" />
+    <Position X="1" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAQAAAAEAgAgAAAAIAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
       <FileName>GameObject.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="StarWars.Player" Collapsed="true">
-    <Position X="4.75" Y="4.75" Width="1.5" />
+    <Position X="5.75" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IQQQAAYAAIAABgQAAAIAECAAABAgAQAAAFQAAABAACA=</HashCode>
+      <HashCode>IQQQAAYAAIAABgQAAAIAECAAABAgAQAAIBQAACAAACA=</HashCode>
       <FileName>Player.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="StarWars.Entity" Collapsed="true">
-    <Position X="2.5" Y="3.25" Width="1.5" />
+    <Position X="3.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAABAQAAQQEAAAAAAAAAAA=</HashCode>
       <FileName>Entity.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="StarWars.Laser" Collapsed="true">
-    <Position X="4.75" Y="6.25" Width="1.5" />
+    <Position X="5.75" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAIAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Laser.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="StarWars.Powerup" Collapsed="true">
-    <Position X="6.5" Y="3.25" Width="1.5" />
+    <Position X="5.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAKAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Powerup.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="StarWars.Explosion" Collapsed="true">
-    <Position X="4.75" Y="0.5" Width="1.5" />
+    <Position X="4.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAkAAAAgAAAAhAAAACAAAAAgAACAAAAAAAAAA=</HashCode>
       <FileName>Explosion.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="StarWars.PowerupManager" Collapsed="true">
-    <Position X="8.25" Y="3.25" Width="1.5" />
+    <Position X="7.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAgAAAAEATCAAIAAAQYAAAAWAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAAAAAABgAAAAEATCAAIAAAQYAAAAWAAAAAAAA=</HashCode>
       <FileName>PowerupManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="StarWars.LaserManager" Collapsed="true">
-    <Position X="6.5" Y="6.25" Width="1.5" />
+    <Position X="7.5" Y="5.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAgAAAAFADAAAAAAAQwAFAAAABAAAAAA=</HashCode>
+      <HashCode>AAQAAAAAAAAABgAAAAFADAAAAAAAQwAFAAAABAAAAAA=</HashCode>
       <FileName>LaserManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="StarWars.EnemyManager" Collapsed="true">
-    <Position X="6.5" Y="1.75" Width="1.5" />
+    <Position X="7.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAASIAAQAABgAAABEgAAAAAAEAQAABCAQAAAAAAAI=</HashCode>
+      <HashCode>AAQAgSIAAQAABgAAABEgAAAAAAECQAABCAQAAAAAAMA=</HashCode>
       <FileName>EnemyManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="StarWars.ExplosionManager" Collapsed="true">
-    <Position X="6.5" Y="0.5" Width="1.5" />
+    <Position X="6.25" Y="0.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAQAoAAAAAAAEgAAAABAAAAAAACAAAAACAQAAAQAAAA=</HashCode>
+      <HashCode>AAQAoAAAAAAAFgAAAABAAAAAAACAAAAACAQAAAQAAAA=</HashCode>
       <FileName>ExplosionManager.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="StarWars.Button" Collapsed="true">
+    <Position X="1" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAAgAAAgAAAAAAAAAAAAQAAAAMAEAABAAAAAA=</HashCode>
+      <FileName>Button.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StarWars.Cursor" Collapsed="true">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAQAAAAAABAAAAAAAAAAABAQAAAABAFAAAAAAAgA=</HashCode>
+      <FileName>Cursor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StarWars.Game1" Collapsed="true">
+    <Position X="10.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CD4KkVQABUiSwyFhogAYQIEQAQAYBCgRQBAoJIAgKIQ=</HashCode>
+      <FileName>Game1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StarWars.Highscore" Collapsed="true">
+    <Position X="10.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAQAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Highscore.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StarWars.HighscoreManager" Collapsed="true">
+    <Position X="12" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAIAAAABAgAEgAAABIIQAAAAAUAAACQAAACAAAA=</HashCode>
+      <FileName>HighscoreManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StarWars.Program" Collapsed="true">
+    <Position X="12" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StarWars.TextBoxInputManager" Collapsed="true">
+    <Position X="10.25" Y="4.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAQIAACACAAAAEAAAAAAAAAAAAAAAQAABEAAAAAAAA=</HashCode>
+      <FileName>TextBoxInputManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="StarWars.GameState" Collapsed="true">
+    <Position X="13.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAggAAAAAAAAAAAAAAAAAAQAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>States.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="StarWars.ClickableButtonState" Collapsed="true">
+    <Position X="10.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIACAAAQAAAAAAAAA=</HashCode>
+      <FileName>States.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="StarWars.CursorState" Collapsed="true">
+    <Position X="12" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>States.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

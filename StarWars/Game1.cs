@@ -50,6 +50,8 @@ namespace StarWars
             //Gamewindow size and fullscreen mode
             graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
             graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            //Fullscreen
+            graphics.IsFullScreen = true;
 
             //Give the window size variables their value
             windowHeight = graphics.PreferredBackBufferHeight;
@@ -74,9 +76,6 @@ namespace StarWars
         {
             //Cursor visibility
             IsMouseVisible = false;
-
-            //Fullscreen
-            graphics.IsFullScreen = true;
 
             //Set the game state to the main menu
             gameState = GameState.MainMenu;

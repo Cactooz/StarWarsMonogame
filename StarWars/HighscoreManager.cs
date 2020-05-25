@@ -21,7 +21,7 @@ namespace StarWars
         private string filePath = Path.Combine(directoryPath, "highscores.lst");
 
         //Default names that will be added if the name is left empty
-        private string[] defaultNames = new string[] { "rey skywalker", "finn", "poe dameron", "bb-8", "r2-d2", "d-o", "c-3pO", "luke skywalker", "leia organa", "kylo ren", "palpatine", "darth vader", "han solo", "padme amidala", "supreme leader snoke", "obi-wan kenobi", "chewbacca", "yoda", "bomba fett", "lando calrissian", "greve dooku", "general hux", "captain phasma", "darth maul", "jar jar binks", "zorli bliss", "mace windu", "general grievous", "maz kanata", "qui-gon jinn", "grand moff tarkin", "jango fett", "watto", "vice amiral holdo", "amiral ackbar", "wedge", "jabba the hutt", "rose tico", "bossk", "cassian andor", "saw gerrera", "jyn erso", "galen erso", "k-2s0", "chirrut imwe", "orson krennic", "baze malbus", "general draven", "bodhi rook", "qi'ra", "enfys nest", "beckett", "babu frik", "porg" };
+        private string[] defaultNames = new string[] { "rey skywalker", "finn", "poe dameron", "bb-8", "r2-d2", "d-o", "c-3pO", "luke skywalker", "leia organa", "kylo ren", "palpatine", "darth vader", "han solo", "padme amidala", "supreme leader snoke", "obi-wan kenobi", "chewbacca", "yoda", "bomba fett", "lando calrissian", "greve dooku", "general hux", "captain phasma", "darth maul", "jar jar binks", "zorli bliss", "mace windu", "general grievous", "maz kanata", "qui-gon jinn", "grand moff tarkin", "jango fett", "watto", "vice amiral holdo", "amiral ackbar", "wedge", "jabba the hutt", "rose tico", "bossk", "cassian andor", "saw gerrera", "jyn erso", "galen erso", "k-2s0", "chirrut imwe", "orson krennic", "baze malbus", "general draven", "bodhi rook", "qi'ra", "enfys nest", "beckett", "babu frik", "porg", "gonk" };
 
         //Background for each highscore shown on the highscore scene
         private Texture2D plateBackground;
@@ -89,7 +89,7 @@ namespace StarWars
             {
                 //Making a smaller highscore plate
                 hitbox.Size = new Point(482, 125);
-                for (int i = 0; i < highscores.Count; i++)
+                for (int i = 0; i < highscores.Count && i < 10; i++)
                 {
                     //Check if its one of the first 5
                     if (i < 5)
