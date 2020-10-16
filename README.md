@@ -16,7 +16,7 @@ Used as Textures for the different ships in the game
 * [Slave 1](https://sketchfab.com/3d-models/slave1-709235d3ffa54e90b378740d474e4a7b)
 * [Lambda T-4a Shuttle](https://sketchfab.com/3d-models/lambda-t-a-shuttle-5b570acb31e04d80adf970bac2c4f661)
 
-### Expolosion
+### Explosion
 * https://opengameart.org/content/2d-explosion-animations-frame-by-frame
 
 ### Planets
