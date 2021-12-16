@@ -117,7 +117,7 @@ namespace StarWars
             else if (kNewState.IsKeyDown(Keys.Y) && kOldState.IsKeyUp(Keys.Y))
                 highscoreName += "y";
             else if (kNewState.IsKeyDown(Keys.Z) && kOldState.IsKeyUp(Keys.Z))
-                highscoreName += "<";
+                highscoreName += "z";
         }
     }
 }
